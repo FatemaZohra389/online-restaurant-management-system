@@ -1,0 +1,34 @@
+.Container{
+
+text-align: center;
+color: peachpuff;
+
+}
+section{
+
+    display:flex;
+}
+.half-width{
+    width:30%;
+    padding:5%;
+    
+    }
+    section{
+    
+        display:flex;
+    }
+.orange-color{
+            color:orange;
+ }
+.order-link{
+                text-decoration: none;
+                background-image: linear-gradient(orange,tomato);
+                color:white;
+                font-weight: 700;
+                padding:10px 40px;
+                border-radius:20px;
+            
+            }
+
+
+        
