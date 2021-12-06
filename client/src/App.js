@@ -1,26 +1,16 @@
-
-
-import Navbar from "./pages/Navbar/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Section from "./pages/Section/Section";
-import { BrowserRouter as Router  } from "react-router-dom";
+import LoginPage from "./pages/Section/LoginPage";
 import "./App.scss";
-import Menu from "./pages/Menu/Menu";
-import Order from "./pages/Order/Order";
-import Signup from "./pages/Signup/Signup";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import HomePage from "./pages/HomePage/HomePage";
-import { BrowserRouter,Routes, Route  } from "react-router-dom";
 
 function App() {
   return (
-
- <Router>
-   <div>
-     <Navbar />
-    
-     <Section />
-   </div>
- </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/*" element={<Section />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 export default App;
