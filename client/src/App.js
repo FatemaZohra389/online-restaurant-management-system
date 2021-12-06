@@ -1,6 +1,6 @@
 
 
-import "./App.css";
+import "./App.scss";
 import Menu from "./pages/Menu/Menu";
 import Order from "./pages/Order/Order";
 import Signup from "./pages/Signup/Signup";

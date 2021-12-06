@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Card, Button, Row, Col, Form, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "./LoginPage.css";
+import { InputGroup, FormControl } from "react-bootstrap";
+import { BsPersonCircle } from "react-icons/bs";
+import { AiOutlineUser } from "react-icons/ai";
+import { RiLockPasswordFill } from "react-icons/ri";
+import "./LoginPage.scss";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -20,25 +24,50 @@ const LoginPage = () => {
   };
   console.log(username, password);
   return (
-    <div className="container login-page">
-      <div className="app-wrapper">
-        <div>
-          <h2 className="title">Log In</h2>
-        </div>
-        <form onSubmit={onClickLogin} className="from-wrapper">
-          <div className="name">
-            <label className="label">User name</label>
-            <input className="input" type="text" name="username" />
-          </div>
-          <div className="password">
-            <label className="label">Password</label>
-            <input className="input" type="text" name="password" />
-          </div>
-
+    <div className="login-page">
+      <div className="container">
+        <div className="app-wrapper">
           <div>
-            <button className="submit">Login</button>
+            <h2 className="title">
+              <BsPersonCircle />
+            </h2>
           </div>
-        </form>
+          <form onSubmit={onClickLogin} className="from-wrapper">
+            <div className="name">
+              <InputGroup className="mb-3">
+                <InputGroup.Text id="basic-addon1">
+                  <AiOutlineUser />
+                </InputGroup.Text>
+                <FormControl
+                  placeholder="Username"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                />
+              </InputGroup>
+              {/* <label className="label">User name</label>
+              <input className="input" type="text" name="username" /> */}
+            </div>
+            <div className="password">
+              <InputGroup className="mb-3">
+                <InputGroup.Text id="basic-addon1">
+                  <RiLockPasswordFill />
+                </InputGroup.Text>
+                <FormControl
+                  type="password"
+                  placeholder="Password"
+                  aria-label="Password"
+                  aria-describedby="basic-addon1"
+                />
+              </InputGroup>
+              {/* <label className="label">Password</label>
+              <input className="input" type="text" name="password" /> */}
+            </div>
+
+            <div>
+              <button className="submit">Login</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
