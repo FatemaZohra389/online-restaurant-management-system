@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Table, Container } from "react-bootstrap";
-import "./Cart.css";
+import "./Cart.scss";
 
 import img1 from "./../../assets/images/img1.jpg";
 import img2 from "./../../assets/images/img2.jpg";
@@ -56,7 +56,7 @@ const dummyData = [
 export class Cart extends Component {
   render() {
     return (
-      <div>
+      <div className="cart-page">
         <h1>Shopping Cart</h1>
 
         <Container>
