@@ -57,7 +57,7 @@ function Menu() {
     <div className="menu-page">
       <Row xs={1} md={12} className="g-4">
         {dummyData.map((menu, idx) => (
-          <Col md={4}>
+          <Col md={3}>
             <Card>
               <Card.Img variant="top" src={menu.img} />
               <Card.Body>
