@@ -1,13 +1,11 @@
 import './Home.css';
-
-import {Nav,Navbar,NavDropdown, Container} from 'react-bootstrap';
+import img4 from '../../assets/images/img4.png';
+import {Nav,Navbar,NavDropdown, Container,Row,Col,Image} from 'react-bootstrap';
 function HomePage() {
     return (
+      <>
    <div>
-       
-        
- 
-  
+      
 
 <section>
 <div class="half-width">
@@ -26,7 +24,13 @@ function HomePage() {
 
 <div class="half-width">
 
-<img src="../../images/" alt=""></img>
+
+ 
+    <img src ={img4} alt=""/>
+    
+  
+    
+   
 
 
 </div>
@@ -36,7 +40,7 @@ function HomePage() {
 
 
 
-
+</>
 
 
 

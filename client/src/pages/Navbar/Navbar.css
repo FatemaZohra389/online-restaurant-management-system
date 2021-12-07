@@ -7,7 +7,9 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-wrap:wrap;
-
+font-family: 'Poppins', sans-serif;
+font-family: 'Readex Pro', sans-serif;
+font-family: 'Roboto Slab', serif;
 }
 header.ul{
 

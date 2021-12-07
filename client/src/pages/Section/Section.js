@@ -4,6 +4,7 @@ import Home from "./Home";
 import Menu from "./Menu";
 import Contact from "./Contact";
 import About from "./About";
+import Cart from "./Cart";
 import Order from "./Order";
 import Navbar from "../Navbar/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -19,6 +20,7 @@ export class Section extends Component {
           <Route path="menu" element={<Menu />} />
           <Route path="contact" element={<Contact />} />
           <Route path="about" element={<About />} />
+          <Route path="cart" element={<Cart />} />
           <Route path="order" element={<Order />} />
         </Routes>
       </div>

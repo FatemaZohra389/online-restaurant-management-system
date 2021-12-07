@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+
+
+
 export class Navbar extends Component {
   render() {
     return (
@@ -19,6 +22,9 @@ export class Navbar extends Component {
               </li>
               <li>
                 <Link to="/contact">Contact</Link>
+              </li>
+              <li>
+                <Link to="/cart">Cart</Link>
               </li>
               <li>
                 <Link to="/order">Order</Link>
