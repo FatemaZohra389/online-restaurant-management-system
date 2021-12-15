@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Container , button } from "react-bootstrap";
+import { Table, Container, button } from "react-bootstrap";
 import "./Cart.scss";
 
 import img1 from "./../../assets/images/img1.jpg";
@@ -80,12 +80,15 @@ export class Cart extends Component {
                     <td>{menu.price}</td>
                     <td>{menu.price * menu.qty}</td>
                   </tr>
-                  
                 );
               })}
             </tbody>
           </Table>
-          <button type="button" class="btn btn-warning">Confirm order</button>
+          <div className="footer"> 
+            <button type="button" class="btn btn-warning">
+              Confirm order
+            </button>
+          </div>
         </Container>
       </div>
     );
