@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate ,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { InputGroup, FormControl } from "react-bootstrap";
 import { BsPersonCircle } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
 import "./LoginPage.scss";
+import PinkButton from "../../shared/components/Buttons/PinkButton";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -61,13 +62,12 @@ const LoginPage = () => {
               {/* <label className="label">Password</label>
               <input className="input" type="text" name="password" /> */}
             </div>
-<div>Forget password?
-
-<Link to="/signup">SignUp </Link>
-
-</div>
+            <div className="d-flex justify-content-between">
+              Forget password?
+              <Link to="/signup">Create an account</Link>
+            </div>
             <div>
-              <button className="submit">Login</button>
+              <PinkButton title="Login" />
             </div>
           </form>
         </div>

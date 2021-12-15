@@ -1,11 +1,12 @@
 import React from "react";
-import "./Signup.scss";
 import  { useState } from "react";
 import { useNavigate ,Link } from "react-router-dom";
 import { InputGroup, FormControl } from "react-bootstrap";
 import { BsPersonCircle } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
+import "./Signup.scss";
+import PinkButton from "../../shared/components/Buttons/PinkButton";
 
 
 const Signup = () => {
@@ -99,7 +100,7 @@ const Signup = () => {
           </form> */}
           </div>
           <div>
-              <button className="submit">Submit</button>
+              <PinkButton title="Confirm" />
             </div>
           </form>
         </div>
