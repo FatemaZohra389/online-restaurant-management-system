@@ -17,33 +17,23 @@ function HomePage() {
 
 
 <br></br>
-
 <a class="order-link" href="https://www.pizzahutbd.com/">Order Here</a>
-
 </div>
-
 <div class="half-width">
-
-
- 
-    <img src ={img4} alt=""/>
+<img src ={img4} alt=""/>
     
   
-    
-   
-
-
 </div>
-  </section>
-        </div>
+</section>
+<section> 
 
 
 
 
+    
+</section>
+</div>
 </>
-
-
-
     )
 }
 

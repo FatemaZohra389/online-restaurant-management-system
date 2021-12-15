@@ -6,10 +6,12 @@ import img1 from "./../../assets/images/img1.jpg";
 import img2 from "./../../assets/images/img2.jpg";
 import img3 from "./../../assets/images/img3.jpg";
 import img5 from "./../../assets/images/img5.png";
-import img6 from "./../../assets/images/img6.jpg";
-import img7 from "./../../assets/images/img7.jpg";
+
 
 import "./Menu.scss";
+
+
+
 const dummyData = [
   {
     id: 1,
@@ -36,22 +38,35 @@ const dummyData = [
     img: img5,
   },
   {
-    id: 3,
-    name: "Pizza",
-    price: 300,
-    img: img6,
+    id: 1,
+    name: "Chicken Stake",
+    price: 500,
+    img: img1,
+  },
+  {
+    id: 2,
+    name: "Italian Pasta",
+    price: 200,
+    img: img2,
   },
   {
     id: 3,
-    name: "Salad ",
+    name: "Chicken Salad",
     price: 300,
-    img: img7,
+    img: img3,
+  },
+  {
+    id: 3,
+    name: "Noodles",
+    price: 300,
+    img: img5,
   },
 ];
 function Menu() {
   const navigate = useNavigate();
   const onClickCart = () => {
-    navigate("/cart");
+    console.log('cliecked');
+    //navigate("/cart");
   };
   return (
     <div className="menu-page">
@@ -62,15 +77,11 @@ function Menu() {
               <Card.Img variant="top" src={menu.img} />
               <Card.Body>
                 <Card.Title>{menu.name}</Card.Title>
-                <Card.Text>
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </Card.Text>
-              </Card.Body>
+                <Card.Title>{menu.price}</Card.Title>
+                </Card.Body>
               <Card.Footer>
                 <Button onClick={onClickCart} variant="warning">
-                  + Cart
+                  Add to  Cart
                 </Button>
               </Card.Footer>
             </Card>

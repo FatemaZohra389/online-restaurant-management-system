@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Card, Button, Row, Col, Form, Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,Link } from "react-router-dom";
 import { InputGroup, FormControl } from "react-bootstrap";
 import { BsPersonCircle } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
@@ -62,7 +61,11 @@ const LoginPage = () => {
               {/* <label className="label">Password</label>
               <input className="input" type="text" name="password" /> */}
             </div>
+<div>Forget password?
 
+<Link to="/signup">SignUp </Link>
+
+</div>
             <div>
               <button className="submit">Login</button>
             </div>
