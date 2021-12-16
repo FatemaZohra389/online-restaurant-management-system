@@ -4,6 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeMenuFromCart } from "../../redux/reducers/cartReducer";
 import { AiFillDelete } from "react-icons/ai";
 import "./Cart.scss";
+import {
+  decrement,
+  increment,
+  reset,
+  
+} from "./redux/actions/index";
 
 import img1 from "./../../assets/images/img1.jpg";
 import img2 from "./../../assets/images/img2.jpg";
@@ -57,10 +63,6 @@ const dummyData = [
   },
 ];
 
-// const cart = useSelector((state) => state.cart);
-// console.log({
-//   cart,
-// })
 export const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -74,7 +76,8 @@ export const Cart = () => {
     });
     return total;
   };
-  return (
+  
+ return (
     <div className="cart-page">
       <h1>Shopping Cart</h1>
 
@@ -83,7 +86,7 @@ export const Cart = () => {
           <thead>
             <tr>
               <th>Serial</th>
-              <th></th>
+              <th>Image</th>
               <th>Name</th>
               <th>Quantity</th>
               <th>Price</th>
@@ -106,7 +109,11 @@ export const Cart = () => {
                     />
                   </td>
                   <td>{menu.name}</td>
-                  <td>{menu.qty}</td>
+                  <td> { menu.qty }
+                  <button onClick={() => dispatch(increment())}>Increase</button>
+                  <button onClick={() => dispatch(reset())}>Reset</button>
+                  <button onClick={() => dispatch(decrement())}>Decrease</button>
+                  </td>
                   <td>$ {menu.price}</td>
                   <td>$ {menu.price * menu.qty}</td>
                   <td>
@@ -142,5 +149,6 @@ export const Cart = () => {
     </div>
   );
 };
+
 
 export default Cart;
