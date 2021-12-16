@@ -43,6 +43,23 @@ export const addMenuToCart = (menu) => async (dispatch, getState) => {
   }
   dispatch(updateCart(temp));
 };
+
+export const decreaseQtyFromCart = (menu) => async (dispatch, getState) => {
+  const list = getState().cart.list;
+  let temp = [...list];
+  temp = temp.map((item) => {
+    if (item.id === menu.id && item.qty > 1) {
+      return {
+        ...menu,
+        qty: item.qty - 1,
+      };
+    } else {
+      return item;
+    }
+  });
+  dispatch(updateCart(temp));
+};
+
 export const removeMenuFromCart = (menu) => async (dispatch, getState) => {
   const list = getState().cart.list;
   let temp = [...list];
