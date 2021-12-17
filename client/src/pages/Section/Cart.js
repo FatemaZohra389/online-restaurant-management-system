@@ -5,7 +5,9 @@ import {
   addMenuToCart,
   removeMenuFromCart,
   decreaseQtyFromCart,
+
 } from "../../redux/reducers/cartReducer";
+import {addToOrder} from "../../redux/reducers/orderReducer";
 import { AiFillDelete } from "react-icons/ai";
 import "./Cart.scss";
 
@@ -22,6 +24,7 @@ export const Cart = () => {
     });
     return total;
   };
+  
 
   return (
     <div className="cart-page">
@@ -94,7 +97,9 @@ export const Cart = () => {
           </tfoot>
         </Table>
         <div className="footer">
-          <button type="button" class="btn btn-warning">
+          <button onClick={() => 
+            dispatch(addToOrder(cart.list))}  type="button" class="btn btn-warning">
+              
             Confirm order
           </button>
         </div>
