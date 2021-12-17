@@ -99,7 +99,6 @@ export const Cart = () => {
         <div className="footer">
           <button onClick={() => 
             dispatch(addToOrder(cart.list))}  type="button" class="btn btn-warning">
-              
             Confirm order
           </button>
         </div>
