@@ -94,7 +94,7 @@ export const Cart = () => {
           </tfoot>
         </Table>
         <div className="footer">
-          <button type="button" class="btn btn-warning">
+          <button onClick={() => addToOrder(cart.list)} type="button" class="btn btn-warning">
             Confirm order
           </button>
         </div>
