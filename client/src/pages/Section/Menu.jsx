@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Button, CardGroup, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useToasts } from "react-toast-notifications";
+import axios from "axios";
 
 import img1 from "./../../assets/images/img1.jpg";
 import img2 from "./../../assets/images/img2.jpg";
@@ -64,6 +65,7 @@ const dummyData = [
   },
 ];
 function Menu() {
+  const [menus, setMenus] = useState([]);
   const { addToast } = useToasts();
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -78,13 +80,28 @@ function Menu() {
     });
     //navigate("/cart");
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/menus")
+      .then(function (response) {
+        // handle success
+        setMenus(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+      });
+  }, []);
+
+  console.log(menus);
+
   return (
     <div className="menu-page p-3">
       <Row xs={1} md={12} className="g-4">
-        {dummyData.map((menu, idx) => (
+        {menus.map((menu, idx) => (
           <Col key={menu.id} md={3}>
             <Card>
-              <Card.Img variant="top" src={menu.img} />
+              <Card.Img variant="top" src={menu.photo} />
               <Card.Body>
                 <Card.Title>{menu.name}</Card.Title>
                 <div className="d-flex justify-content-between align-items-center">
