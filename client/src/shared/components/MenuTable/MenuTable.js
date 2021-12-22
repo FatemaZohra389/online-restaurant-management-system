@@ -1,4 +1,3 @@
-import React from "react";
 import { Table, Container, Button, Image } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -6,12 +5,11 @@ import {
   removeMenuFromCart,
   decreaseQtyFromCart,
 
-} from "../../redux/reducers/cartReducer";
-
-import {addToOrder} from "../../redux/reducers/orderReducer";
+} from "../../../redux/reducers/cartReducer";
+import {addToOrder} from "../../../redux/reducers/orderReducer";
 import { AiFillDelete } from "react-icons/ai";
-import "./Cart.scss";
-
+import "./MenuTable.scss";
+import Modal from "../Modal/Modal";
 export const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -25,12 +23,21 @@ export const Cart = () => {
     });
     return total;
   };
-  
+
 
   return (
     <div className="cart-page">
-      <h1>Shopping Cart</h1>
-
+      <h1>Menu</h1>
+      <div className="footer">
+        <br></br>
+      
+          
+        <> <Modal /> </>
+   
+          
+          
+         
+        </div>
       <Container>
         <Table striped bordered hover responsive>
           <thead>
@@ -81,6 +88,8 @@ export const Cart = () => {
                     >
                       <AiFillDelete />
                     </Button>
+
+                    <button type="button" class="btn btn-warning">Add</button>
                   </td>
                 </tr>
               );
@@ -97,12 +106,7 @@ export const Cart = () => {
             </tr>
           </tfoot>
         </Table>
-        <div className="footer">
-          <button onClick={() => 
-            dispatch(addToOrder(cart.list))}  type="button" class="btn btn-warning">
-            Confirm order
-          </button>
-        </div>
+        
       </Container>
     </div>
   );

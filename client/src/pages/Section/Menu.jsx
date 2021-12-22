@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, CardGroup, Row, Col } from "react-bootstrap";
+import { Card, Button, Row, Col} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useToasts } from "react-toast-notifications";
 import axios from "axios";
-
 import img1 from "./../../assets/images/img1.jpg";
 import img2 from "./../../assets/images/img2.jpg";
 import img3 from "./../../assets/images/img3.jpg";
 import img5 from "./../../assets/images/img5.png";
-
 import "./Menu.scss";
 import { addMenuToCart } from "../../redux/reducers/cartReducer";
+import MenuTable from "../../shared/components/MenuTable/MenuTable";
+
 
 const dummyData = [
   {
@@ -64,6 +64,9 @@ const dummyData = [
     img: img5,
   },
 ];
+
+
+
 function Menu() {
   const [menus, setMenus] = useState([]);
   const { addToast } = useToasts();
@@ -93,10 +96,15 @@ function Menu() {
       });
   }, []);
 
-  console.log(menus);
 
-  return (
+  console.log(menus);
+return (
     <div className="menu-page p-3">
+      {/* Admin table */}
+      <> <MenuTable /> </>
+ 
+
+
       <Row xs={1} md={12} className="g-4">
         {menus.map((menu, idx) => (
           <Col key={menu.id} md={3}>
@@ -118,7 +126,7 @@ function Menu() {
         ))}
       </Row>
     </div>
-  );
-}
-
-export default Menu;
+   
+    )  }
+          
+          export default Menu;
