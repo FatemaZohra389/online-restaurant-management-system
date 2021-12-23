@@ -1,24 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { addMenu, updateMenu } from "../../../redux/reducers/menuReducer";
 import "./Modal.scss";
 
 function MenuModal({ onHide, show, menu }) {
   // const [show, setShow] = useState(false);
   const handleClose = () => onHide();
-  // const handleShow = () => setShow(true);
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [photo, setPhoto] = useState(null);
 
   const onSubmit = () => {
-    console.log({ name, price, photo });
+    if (name && photo && price) {
+      if (menu.id) {
+        dispatch(
+          updateMenu({
+            id: menu.id,
+            name: name,
+            photo: photo,
+            price: price,
+          })
+        ).then((res) => {
+          onHide();
+        });
+      } else {
+        dispatch(
+          addMenu({
+            name: name,
+            photo: photo,
+            price: price,
+          })
+        ).then((res) => {
+          onHide();
+        });
+      }
+    }
   };
 
   useEffect(() => {
     setName(menu.name);
     setPhoto(menu.photo);
     setPrice(menu.price);
-  }, [menu]);
+  }, []);
 
   /**
    * Convert image to base64

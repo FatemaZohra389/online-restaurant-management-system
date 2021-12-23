@@ -4,15 +4,18 @@ import { Table, Container, Button, Image } from "react-bootstrap";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import "./MenuTable.scss";
 import Modal from "../Modal/MenuModal";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteMenu } from "../../../redux/reducers/menuReducer";
 
-export const MenuTable = ({ list }) => {
+export const MenuTable = () => {
+  const { list } = useSelector((state) => state.menu);
+  const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState({
     name: "",
     price: 0,
     photo: null,
   });
-  // const dispatch = useDispatch();
 
   const onHideModal = () => {
     setShowModal(false);
@@ -72,6 +75,7 @@ export const MenuTable = ({ list }) => {
                         variant="danger"
                         onClick={() => {
                           // dispatch(removeMenuFromCart(menu));
+                          dispatch(deleteMenu(menu));
                         }}
                       >
                         <AiFillDelete />
@@ -80,7 +84,10 @@ export const MenuTable = ({ list }) => {
                         onClick={() => {
                           setShowModal(true);
                           setSelectedMenu({
-                            ...menu,
+                            id: menu.id,
+                            name: menu.name,
+                            price: menu.price,
+                            photo: menu.photo,
                           });
                         }}
                         type="button"
