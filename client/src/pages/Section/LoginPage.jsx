@@ -38,7 +38,8 @@ const LoginPage = () => {
                 <InputGroup.Text id="basic-addon1">
                   <AiOutlineUser />
                 </InputGroup.Text>
-                <FormControl
+                <FormControl 
+                onChange={onChangeUsername }
                   placeholder="Username"
                   aria-label="Username"
                   aria-describedby="basic-addon1"
@@ -53,6 +54,7 @@ const LoginPage = () => {
                   <RiLockPasswordFill />
                 </InputGroup.Text>
                 <FormControl
+                onChange={onChangePassword }
                   type="password"
                   placeholder="Password"
                   aria-label="Password"
