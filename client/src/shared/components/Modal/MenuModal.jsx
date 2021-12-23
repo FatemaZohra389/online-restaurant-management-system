@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import "./Modal.scss";
 
-function MenuModal({ onHide, show }) {
+function MenuModal({ onHide, show, menu }) {
   // const [show, setShow] = useState(false);
   const handleClose = () => onHide();
   // const handleShow = () => setShow(true);
@@ -14,9 +14,15 @@ function MenuModal({ onHide, show }) {
     console.log({ name, price, photo });
   };
 
+  useEffect(() => {
+    setName(menu.name);
+    setPhoto(menu.photo);
+    setPrice(menu.price);
+  }, [menu]);
+
   /**
    * Convert image to base64
-   * @param {*} file 
+   * @param {*} file
    */
   const getBase64 = (file) => {
     try {
@@ -35,7 +41,7 @@ function MenuModal({ onHide, show }) {
     <>
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title>Create Menu</Modal.Title>
+          <Modal.Title>{menu.id ? "Edit" : "Create"} Menu</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <>
@@ -43,6 +49,7 @@ function MenuModal({ onHide, show }) {
               <Form.Group className="mb-2">
                 <Form.Label> Menu Name</Form.Label>
                 <Form.Control
+                  value={name}
                   onChange={(e) => setName(e.target.value)}
                   type="text"
                   placeholder="Enter Menu name"
@@ -51,6 +58,7 @@ function MenuModal({ onHide, show }) {
               <Form.Group className="mb-2">
                 <Form.Label> Menu Price</Form.Label>
                 <Form.Control
+                  value={price}
                   onChange={(e) => setPrice(e.target.value)}
                   type="number"
                   placeholder="Enter Menu price"

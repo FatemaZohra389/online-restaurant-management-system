@@ -7,6 +7,11 @@ import Modal from "../Modal/MenuModal";
 
 export const MenuTable = ({ list }) => {
   const [showModal, setShowModal] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState({
+    name: "",
+    price: 0,
+    photo: null,
+  });
   // const dispatch = useDispatch();
 
   const onHideModal = () => {
@@ -15,11 +20,23 @@ export const MenuTable = ({ list }) => {
 
   return (
     <div className="cart-page">
-      <Modal show={showModal} onHide={onHideModal} />
+      {showModal && (
+        <Modal show={showModal} onHide={onHideModal} menu={selectedMenu} />
+      )}
       <h1>Menu</h1>
       <Container>
         <div className="w-100 text-right d-flex justify-content-end mb-2">
-          <Button variant="warning" onClick={() => setShowModal(true)}>
+          <Button
+            variant="warning"
+            onClick={() => {
+              setShowModal(true);
+              setSelectedMenu({
+                name: "",
+                price: 0,
+                photo: null,
+              });
+            }}
+          >
             + Add
           </Button>
         </div>
@@ -62,6 +79,9 @@ export const MenuTable = ({ list }) => {
                       <button
                         onClick={() => {
                           setShowModal(true);
+                          setSelectedMenu({
+                            ...menu,
+                          });
                         }}
                         type="button"
                         className="btn btn-primary"

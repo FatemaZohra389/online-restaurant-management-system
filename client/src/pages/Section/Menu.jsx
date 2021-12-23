@@ -26,7 +26,7 @@ function Menu() {
     //navigate("/cart");
   };
 
-  useEffect(() => {
+  const updateList = () => {
     axios
       .get("http://localhost:5000/menus")
       .then(function (response) {
@@ -36,6 +36,10 @@ function Menu() {
       .catch(function (error) {
         // handle error
       });
+  };
+
+  useEffect(() => {
+    updateList();
   }, []);
 
   console.log(menus);
@@ -43,8 +47,7 @@ function Menu() {
     <div className="menu-page p-3">
       {/* Admin table */}
       <>
-        {" "}
-        <MenuTable list={menus} />{" "}
+        <MenuTable list={menus} />
       </>
 
       <Row xs={1} md={12} className="g-4">
