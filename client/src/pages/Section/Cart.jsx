@@ -39,7 +39,7 @@ export const Cart = () => {
               <th>Serial</th>
               <th>Image</th>
               <th>Name</th>
-              <th className="text-center">Quantity</th>
+              <th>Quantity</th>
               <th>Price</th>
               <th>Total</th>
               <th className="text-center">Actions</th>
@@ -60,7 +60,7 @@ export const Cart = () => {
                     />
                   </td>
                   <td className="align-middle">{menu.name}</td>
-                  <td className="text-center align-middle">
+                  <td className="align-middle">
                     <Button
                       size="sm"
                       variant="outline-danger"

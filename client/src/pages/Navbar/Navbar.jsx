@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Nav, Navbar as NavBar, Container, Button } from "react-bootstrap";
 import "./Navbar.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,22 +12,25 @@ const Navbar = () => {
   const onLogOut = () => {
     dispatch(userLogOut());
     navigate("/");
-
-  }
+  };
   return (
     <>
       <NavBar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container fluid>
           <Nav navbarScroll className="me-auto">
+            {user.data.type !== "admin" && (
             <Nav.Link href="/home">Home</Nav.Link>
+            )}
             <Nav.Link href="/menu">Menu</Nav.Link>
-            <Nav.Link href="/cart">Cart</Nav.Link>
+            {user.data.type !== "admin" && (
+              <Nav.Link href="/cart">Cart</Nav.Link>
+            )}
             <Nav.Link href="/order">Order</Nav.Link>
           </Nav>
           <NavBar className="justify-content-end">
             <NavBar.Text>
               {user?.data?.name}{" "}
-              <Button onClick={onLogOut}  type="button" variant="link" size="sm">
+              <Button onClick={onLogOut} type="button" variant="link" size="sm">
                 Sign Out
               </Button>
             </NavBar.Text>

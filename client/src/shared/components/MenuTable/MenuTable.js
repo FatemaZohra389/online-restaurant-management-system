@@ -26,38 +26,40 @@ export const MenuTable = () => {
       {showModal && (
         <Modal show={showModal} onHide={onHideModal} menu={selectedMenu} />
       )}
-      <h1>Menu</h1>
-      <Container>
-        <div className="w-100 text-right d-flex justify-content-end mb-2">
-          <Button
-            variant="warning"
-            onClick={() => {
-              setShowModal(true);
-              setSelectedMenu({
-                name: "",
-                price: 0,
-                photo: null,
-              });
-            }}
-          >
-            + Add
-          </Button>
-        </div>
-        <Table striped bordered hover responsive>
+      <div className="d-flex flex-row flex-wrap justify-content-between">
+        <h4>Menu</h4>
+        <Button
+          variant="warning"
+          onClick={() => {
+            setShowModal(true);
+            setSelectedMenu({
+              name: "",
+              price: 0,
+              photo: null,
+            });
+          }}
+        >
+          + Add
+        </Button>
+      </div>
+      <hr />
+      <Container fluid>
+        <div className="w-100 text-right d-flex justify-content-end mb-2"></div>
+        <Table striped borderless hover responsive>
           <thead>
             <tr>
               <th>Serial</th>
               <th>Image</th>
               <th>Name</th>
               <th>Price</th>
-              <th>Actions</th>
+              <th className="text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             {list.map((menu, index) => {
               return (
                 <tr key={menu.id}>
-                  <td>{index + 1}</td>
+                  <td className="align-middle">{index + 1}</td>
                   <td>
                     <Image
                       height={50}
@@ -67,9 +69,9 @@ export const MenuTable = () => {
                       fluid
                     />
                   </td>
-                  <td>{menu.name}</td>
-                  <td>$ {menu.price}</td>
-                  <td>
+                  <td className="align-middle">{menu.name}</td>
+                  <td className="align-middle">${menu.price}</td>
+                  <td width="6%" className="text-center align-middle">
                     <div className="d-flex flex-row justify-content-around">
                       <Button
                         variant="danger"
