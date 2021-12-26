@@ -5,10 +5,9 @@ import {
   addMenuToCart,
   removeMenuFromCart,
   decreaseQtyFromCart,
-
 } from "../../redux/reducers/cartReducer";
 
-import {addToOrder} from "../../redux/reducers/orderReducer";
+import { addToOrder } from "../../redux/reducers/orderReducer";
 import { AiFillDelete } from "react-icons/ai";
 import "./Cart.scss";
 
@@ -25,30 +24,32 @@ export const Cart = () => {
     });
     return total;
   };
-  
 
   return (
     <div className="cart-page">
-      <h1>Shopping Cart</h1>
+      <div className="m-2">
+        <h4>Shopping Cart</h4>
+      </div>
+      <hr />
 
-      <Container>
-        <Table striped bordered hover responsive>
+      <Container fluid>
+        <Table striped borderless hover responsive size="sm">
           <thead>
             <tr>
               <th>Serial</th>
               <th>Image</th>
               <th>Name</th>
-              <th>Quantity</th>
+              <th className="text-center">Quantity</th>
               <th>Price</th>
               <th>Total</th>
-              <th>Actions</th>
+              <th className="text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             {cart.list.map((menu, index) => {
               return (
                 <tr key={menu.id}>
-                  <td>{index + 1}</td>
+                  <td  className="align-middle">{index + 1}</td>
                   <td>
                     <Image
                       height={50}
@@ -58,23 +59,32 @@ export const Cart = () => {
                       fluid
                     />
                   </td>
-                  <td>{menu.name}</td>
-                  <td>
-                    <button onClick={() => dispatch(decreaseQtyFromCart(menu))}>
+                  <td className="align-middle">{menu.name}</td>
+                  <td className="text-center align-middle">
+                    <Button
+                      size="sm"
+                      variant="outline-danger"
+                      onClick={() => dispatch(decreaseQtyFromCart(menu))}
+                    >
                       -
-                    </button>
-                    <span>&nbsp;{menu.qty}&nbsp;</span>
-                    <button onClick={() => dispatch(addMenuToCart(menu))}>
+                    </Button>
+                    <span>&nbsp;&nbsp;<b>{menu.qty}</b>&nbsp;&nbsp;</span>
+                    <Button
+                      size="sm"
+                      variant="outline-primary"
+                      onClick={() => dispatch(addMenuToCart(menu))}
+                    >
                       +
-                    </button>
+                    </Button>
 
                     {/* <button onClick={() => dispatch(reset())}>Reset</button> */}
                     {/* <button onClick={() => dispatch(decrement())}>Decrease</button> */}
                   </td>
-                  <td>$ {menu.price}</td>
-                  <td>$ {menu.price * menu.qty}</td>
-                  <td>
+                  <td className="align-middle">${menu.price}</td>
+                  <td className="align-middle">${menu.price * menu.qty}</td>
+                  <td width="5%" className="text-center">
                     <Button
+                    variant="danger"
                       onClick={() => {
                         dispatch(removeMenuFromCart(menu));
                       }}
@@ -89,17 +99,24 @@ export const Cart = () => {
           <tfoot>
             <tr>
               <td colSpan={5}>
-                <b>Total Price</b>
+                <h5>
+                  <b>Total Price</b>
+                </h5>
               </td>
               <td>
-                <b>$ {getTotalPrice()}</b>
+                <h5>
+                  <b>${getTotalPrice()}</b>
+                </h5>
               </td>
             </tr>
           </tfoot>
         </Table>
         <div className="footer">
-          <button onClick={() => 
-            dispatch(addToOrder(cart.list))}  type="button" class="btn btn-warning">
+          <button
+            onClick={() => dispatch(addToOrder(cart.list))}
+            type="button"
+            class="btn btn-warning"
+          >
             Confirm order
           </button>
         </div>

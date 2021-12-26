@@ -14,6 +14,7 @@ function Menu() {
   const { addToast } = useToasts();
   const dispatch = useDispatch();
   const { list } = useSelector((state) => state.menu);
+  const user = useSelector((state) => state.user);
 
   const onClickCart = (menu) => {
     dispatch(addMenuToCart(menu));
@@ -30,30 +31,34 @@ function Menu() {
   return (
     <div className="menu-page p-3">
       {/* Admin table */}
-      <>
-        <MenuTable />
-      </>
+      {user.data.type === "admin" && (
+        <>
+          <MenuTable />
+        </>
+      )}
 
-      <Row xs={1} md={12} className="g-4">
-        {list.map((menu, idx) => (
-          <Col key={menu.id} md={3}>
-            <Card>
-              <Card.Img variant="top" src={menu.photo} />
-              <Card.Body>
-                <Card.Title>{menu.name}</Card.Title>
-                <div className="d-flex justify-content-between align-items-center">
-                  <Card.Subtitle>$ {menu.price}</Card.Subtitle>
+      {user.data.type === "customer" && (
+        <Row xs={1} md={12} className="g-4">
+          {list.map((menu, idx) => (
+            <Col key={menu.id} md={2}>
+              <Card>
+                <Card.Img variant="top" src={menu.photo} />
+                <Card.Body>
+                  <Card.Title>{menu.name}</Card.Title>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <Card.Subtitle>$ {menu.price}</Card.Subtitle>
 
-                  <Button onClick={() => onClickCart(menu)} variant="warning">
-                    <AiOutlineShoppingCart />
-                    &nbsp;Add
-                  </Button>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+                    <Button onClick={() => onClickCart(menu)} variant="warning">
+                      <AiOutlineShoppingCart />
+                      &nbsp;Add
+                    </Button>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
     </div>
   );
 }
