@@ -9,5 +9,7 @@ const users = require("../controllers/user.controller");
 
 // * Get all Users
 router.get("/", users.findAll);
+router.post("/login", users.login);
+router.post("/register", users.register);
 
 module.exports = router;
