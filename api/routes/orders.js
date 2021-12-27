@@ -5,7 +5,7 @@ const orders = require("../controllers/order.controller");
 // * Get all Menus
 router.get("/", orders.findAll);
 router.post("/", orders.create);
-// router.patch("/", menus.updateMenu);
+router.patch("/", orders.update);
 
 // router.get("/:id", menus.findById);
 // router.delete("/:id", menus.removeMenu);

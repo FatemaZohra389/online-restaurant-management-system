@@ -7,8 +7,7 @@ import About from "./About";
 import Cart from "./Cart";
 import Order from "./Order";
 import Navbar from "../Navbar/Navbar";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginPage from "./LoginPage";
+import { Route, Routes } from "react-router-dom";
 
 export class Section extends Component {
   render() {

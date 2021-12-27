@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Container, Button } from "react-bootstrap";
 import "./Order.scss";
-import { AiFillEye, AiFillEdit } from "react-icons/ai";
+import { AiFillEye } from "react-icons/ai";
 import { fetchOrders } from "../../redux/reducers/orderReducer";
 import OrderView from "../../shared/components/Order/OrderView";
 const Order = () => {
@@ -64,23 +64,13 @@ const Order = () => {
                         <div className="d-flex flex-row flex-wrap justify-content-around">
                           <Button
                             size="sm"
-                            variant="light"
+                            variant="primary"
                             onClick={() => {
                               onView();
                               setSelectedOrder(item);
                             }}
                           >
                             <AiFillEye />
-                          </Button>
-                          <Button
-                            size="sm"
-                            onClick={() => {
-                              setSelectedOrder(item);
-                            }}
-                            type="button"
-                            className="btn btn-primary"
-                          >
-                            <AiFillEdit />
                           </Button>
                         </div>
                       </td>

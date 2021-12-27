@@ -3,19 +3,19 @@ const db = require("../models");
 const Order = db.orders;
 const Cart = db.carts;
 const Menu = db.menus;
+const User = db.users;
 
 exports.findAll = async (req, res) => {
   try {
     let orderData = await Order.findAll({
-      order: [
-        ["id", "DESC"],
-      ],
+      order: [["id", "DESC"]],
       include: [
         {
           as: "carts",
           model: Cart,
-          include: [Menu]
+          include: [Menu],
         },
+        User,
       ],
     });
     res.send(orderData);
@@ -30,7 +30,7 @@ exports.findAll = async (req, res) => {
 exports.create = async (req, res) => {
   let transaction;
   const params = req.body;
-  const { userId, status = "Pending", carts, address } = params;
+  const { userId, status = "Placed", carts, address } = params;
   try {
     // eslint-disable-next-line prefer-const
     transaction = await db.sequelize.transaction();
@@ -60,6 +60,31 @@ exports.create = async (req, res) => {
     res.send(responseData);
   } catch (e) {
     if (transaction) await transaction.rollback();
+    res.status(500).send({
+      error: e,
+      message: e.message || "Unexpected error",
+    });
+  }
+};
+
+exports.update = async (request, res) => {
+  const params = request.body;
+  const { status, id } = params;
+  try {
+    const order = await Order.findOne({ where: { id: params.id } });
+    if (order) {
+      const data = await order.update({ status: status }); // database update query where id = 1/2/3/4
+      res.send({
+        ...order,
+        status,
+      }); // send data to frontend
+    } else {
+      res.status(404).send({
+        message: "No order found",
+      });
+    }
+  } catch (e) {
+    console.error(e);
     res.status(500).send({
       error: e,
       message: e.message || "Unexpected error",

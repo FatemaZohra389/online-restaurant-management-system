@@ -43,6 +43,7 @@ function MenuModal({ onHide, show, menu }) {
     setName(menu.name);
     setPhoto(menu.photo);
     setPrice(menu.price);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**
