@@ -4,12 +4,12 @@ module.exports = (sequelize, Sequelize) =>
       type: Sequelize.INTEGER,
       allowNull: false,
     },
-    totalPrice: {
-      type: Sequelize.INTEGER,
+    address: {
+      type: Sequelize.TEXT,
       allowNull: false,
     },
     status: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       allowNull: false,
     },
   });

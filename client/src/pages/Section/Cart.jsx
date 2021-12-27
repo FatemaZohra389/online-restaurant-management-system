@@ -49,7 +49,7 @@ export const Cart = () => {
             {cart.list.map((menu, index) => {
               return (
                 <tr key={menu.id}>
-                  <td  className="align-middle">{index + 1}</td>
+                  <td className="align-middle">{index + 1}</td>
                   <td>
                     <Image
                       height={50}
@@ -68,7 +68,9 @@ export const Cart = () => {
                     >
                       -
                     </Button>
-                    <span>&nbsp;&nbsp;<b>{menu.qty}</b>&nbsp;&nbsp;</span>
+                    <span>
+                      &nbsp;&nbsp;<b>{menu.qty}</b>&nbsp;&nbsp;
+                    </span>
                     <Button
                       size="sm"
                       variant="outline-primary"
@@ -84,7 +86,7 @@ export const Cart = () => {
                   <td className="align-middle">${menu.price * menu.qty}</td>
                   <td width="5%" className="text-center">
                     <Button
-                    variant="danger"
+                      variant="danger"
                       onClick={() => {
                         dispatch(removeMenuFromCart(menu));
                       }}

@@ -1,34 +1,65 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
-    list: [],
-    loading: false,
-    error: false,
-  };
+  list: [],
+  loading: false,
+  error: false,
+};
 
-  const cartSlice = createSlice({
-    name: "order",
-    initialState,
-    reducers: {
-        addCartToOrder(state, action) {
-        state.list = [...action.payload];
-      },
+const orderSlice = createSlice({
+  name: "order",
+  initialState,
+  reducers: {
+    startLoading(state) {
+      state.loading = true;
     },
-  });
-  
+    stopLoading(state) {
+      state.loading = false;
+    },
+    updateOrderList(state, action) {
+      state.list = [...action.payload];
+    },
+  },
+});
 
-export const { addCartToOrder  } = cartSlice.actions;
+export const { updateOrderList, startLoading, stopLoading } =
+  orderSlice.actions;
 
-export default cartSlice.reducer;
+export default orderSlice.reducer;
+
+export const fetchOrders = () => async (dispatch, getState) => {
+  dispatch(startLoading());
+  axios
+    .get("http://localhost:5000/orders")
+    .then(function (response) {
+      // handle success
+      dispatch(updateOrderList(response.data));
+    })
+    .catch(function (error) {
+      // handle error
+    })
+    .finally(() => {
+      dispatch(stopLoading());
+    });
+};
 
 export const addToOrder = (cart) => async (dispatch, getState) => {
-  const list = getState().order.list;
- let temp=[...list];
- temp.push(cart);
-
-  
-    dispatch(addCartToOrder(temp));
+  const user = getState().user;
+  console.log(user);
+  console.log(cart);
+  const params = {
+    userId: user.data.id,
+    address: user.data.address,
+    status: "Pending",
+    carts: cart,
   };
-  
-  
-  
+  axios
+    .post("http://localhost:5000/orders", { ...params })
+    .then((res) => {
+      dispatch(fetchOrders());
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
