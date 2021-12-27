@@ -3,16 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { Table, Container, Button } from "react-bootstrap";
 import "./Order.scss";
 import { AiFillEye } from "react-icons/ai";
-import { fetchOrders } from "../../redux/reducers/orderReducer";
+import {
+  fetchOrders,
+  fetchUserOrders,
+} from "../../redux/reducers/orderReducer";
 import OrderView from "../../shared/components/Order/OrderView";
 const Order = () => {
   const [view, setView] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const orders = useSelector((state) => state.order);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchOrders());
-  }, []);
+    if (user && user.data.type === "customer") {
+      dispatch(fetchUserOrders(user.data.id));
+    } else if (user.data.type === "admin") {
+      dispatch(fetchOrders());
+    }
+  }, [user]);
+
   const getTotalPrice = (carts) => {
     let total = 0;
     carts?.forEach((element) => {
@@ -82,7 +91,9 @@ const Order = () => {
           </Table>
         </Container>
       </div>
-      {view && <OrderView show={view} onHide={onViewHide} order={selectedOrder} />} 
+      {view && (
+        <OrderView show={view} onHide={onViewHide} order={selectedOrder} />
+      )}
     </>
   );
 };

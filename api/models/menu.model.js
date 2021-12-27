@@ -18,6 +18,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.BOOLEAN,
         allowNull: true,
       },
+      disabled: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+      },
     },
     {
       indexes: [{ unique: true, fields: ["name"] }],

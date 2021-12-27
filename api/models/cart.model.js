@@ -10,6 +10,10 @@ module.exports = (sequelize, Sequelize) =>
       allowNull: false,
       unique: 'order_and_menu',
     },
+    name: {
+      type: Sequelize.TEXT,
+      allowNull: false,
+    },
     qty: {
       type: Sequelize.INTEGER,
       allowNull: false,

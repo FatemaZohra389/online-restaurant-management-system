@@ -45,6 +45,22 @@ export const fetchOrders = () => async (dispatch, getState) => {
     });
 };
 
+export const fetchUserOrders = (userId) => async (dispatch, getState) => {
+  dispatch(startLoading());
+  axios
+    .get(`http://localhost:5000/orders/user/${userId}`)
+    .then(function (response) {
+      // handle success
+      dispatch(updateOrderList(response.data));
+    })
+    .catch(function (error) {
+      // handle error
+    })
+    .finally(() => {
+      dispatch(stopLoading());
+    });
+};
+
 export const addToOrder = (cart) => async (dispatch, getState) => {
   const user = getState().user;
   console.log(user);

@@ -35,17 +35,19 @@ db.orders.belongsTo(db.users, {
 db.orders.hasMany(db.carts, {
   as: "carts",
 });
-
-db.menus.hasMany(db.carts, {
+/* db.menus.hasMany(db.carts, {
   as: "carts",
-});
+}); */
+/* db.carts.hasOne(db.menus, {
+  as: "menu",
+}); */
 db.carts.belongsTo(db.orders, {
   onDelete: "CASCADE",
   foreignKey: { allowNull: false },
   hooks: true,
 });
 db.carts.belongsTo(db.menus, {
-  // onDelete: "CASCADE",
+  onDelete: 'RESTRICT',
   foreignKey: { allowNull: false },
   hooks: true,
 });

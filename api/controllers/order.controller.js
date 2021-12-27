@@ -27,6 +27,32 @@ exports.findAll = async (req, res) => {
   }
 };
 
+exports.findByUser = async (req, res) => {
+  const params = req.params;
+  try {
+    let orderData = await Order.findAll({
+      order: [["id", "DESC"]],
+      include: [
+        {
+          as: "carts",
+          model: Cart,
+          include: [Menu],
+        },
+        User,
+      ],
+      where: {
+        userId: params.userId,
+      },
+    });
+    res.send(orderData);
+  } catch (e) {
+    res.status(500).send({
+      error: e,
+      message: e.message || "Unexpected error",
+    });
+  }
+};
+
 exports.create = async (req, res) => {
   let transaction;
   const params = req.body;
@@ -44,6 +70,7 @@ exports.create = async (req, res) => {
       return {
         orderId: id,
         menuId: cart.id,
+        name: cart.name,
         price: cart.price,
         qty: cart.qty,
       };

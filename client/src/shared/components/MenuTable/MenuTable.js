@@ -45,7 +45,7 @@ export const MenuTable = () => {
       <hr />
       <Container fluid>
         <div className="w-100 text-right d-flex justify-content-end mb-2"></div>
-        <Table striped borderless hover responsive>
+        <Table size="sm" striped borderless hover responsive>
           <thead>
             <tr>
               <th>Serial</th>
@@ -71,9 +71,10 @@ export const MenuTable = () => {
                   </td>
                   <td className="align-middle">{menu.name}</td>
                   <td className="align-middle">${menu.price}</td>
-                  <td width="6%" className="text-center align-middle">
+                  <td width="10%" className="text-center align-middle">
                     <div className="d-flex flex-row justify-content-around">
                       <Button
+                        size="sm"
                         variant="danger"
                         onClick={() => {
                           // dispatch(removeMenuFromCart(menu));
@@ -82,7 +83,8 @@ export const MenuTable = () => {
                       >
                         <AiFillDelete />
                       </Button>
-                      <button
+                      <Button
+                        size="sm"
                         onClick={() => {
                           setShowModal(true);
                           setSelectedMenu({
@@ -96,7 +98,7 @@ export const MenuTable = () => {
                         className="btn btn-primary"
                       >
                         <AiFillEdit />
-                      </button>
+                      </Button>
                     </div>
                   </td>
                 </tr>

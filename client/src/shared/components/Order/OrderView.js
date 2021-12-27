@@ -59,7 +59,7 @@ const OrderView = ({ order, show, onHide }) => {
                         fluid
                       />
                     </td>
-                    <td className="align-middle">{item.menu.name}</td>
+                    <td className="align-middle">{item.name}</td>
                     <td className="align-middle">
                       <span>{item.qty}</span>
                     </td>
