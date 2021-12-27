@@ -13,10 +13,20 @@ const cartSlice = createSlice({
     updateCart(state, action) {
       state.list = [...action.payload];
     },
+    clearAll(state) {
+      state.list = [];
+    },
+    startLoading(state) {
+      state.loading = true;
+    },
+    stopLoading(state) {
+      state.loading = false;
+    },
   },
 });
 
-export const { updateCart } = cartSlice.actions;
+export const { updateCart, clearAll, startLoading, stopLoading } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
 
@@ -72,4 +82,8 @@ export const removeMenuFromCart = (menu) => async (dispatch, getState) => {
   });
   temp = temp.filter((item) => item !== null);
   dispatch(updateCart(temp));
+};
+
+export const clearCart = () => async (dispatch) => {
+  dispatch(clearAll());
 };

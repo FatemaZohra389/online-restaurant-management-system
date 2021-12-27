@@ -48,7 +48,7 @@ function Menu() {
                   <div className="d-flex justify-content-between align-items-center">
                     <Card.Subtitle>$ {menu.price}</Card.Subtitle>
 
-                    <Button onClick={() => onClickCart(menu)} variant="warning">
+                    <Button size="sm" onClick={() => onClickCart(menu)} variant="warning">
                       <AiOutlineShoppingCart />
                       &nbsp;Add
                     </Button>

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { clearCart } from "./cartReducer";
 
 const initialState = {
   list: [],
@@ -51,15 +52,18 @@ export const addToOrder = (cart) => async (dispatch, getState) => {
   const params = {
     userId: user.data.id,
     address: user.data.address,
-    status: "Pending",
+    status: "Placed",
     carts: cart,
   };
+  dispatch(startLoading());
   axios
     .post("http://localhost:5000/orders", { ...params })
     .then((res) => {
       dispatch(fetchOrders());
+      dispatch(clearCart());
     })
     .catch((e) => {
       console.log(e);
+      dispatch(stopLoading());
     });
 };

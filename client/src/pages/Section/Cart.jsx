@@ -13,6 +13,7 @@ import "./Cart.scss";
 
 export const Cart = () => {
   const cart = useSelector((state) => state.cart);
+  const order = useSelector((state) => state.order);
   const dispatch = useDispatch();
   console.log({
     cart,
@@ -84,8 +85,9 @@ export const Cart = () => {
                   </td>
                   <td className="align-middle">${menu.price}</td>
                   <td className="align-middle">${menu.price * menu.qty}</td>
-                  <td width="5%" className="text-center">
+                  <td width="5%" className="text-center align-middle">
                     <Button
+                      size="sm"
                       variant="danger"
                       onClick={() => {
                         dispatch(removeMenuFromCart(menu));
@@ -113,15 +115,20 @@ export const Cart = () => {
             </tr>
           </tfoot>
         </Table>
-        <div className="footer">
-          <button
-            onClick={() => dispatch(addToOrder(cart.list))}
-            type="button"
-            class="btn btn-warning"
-          >
-            Confirm order
-          </button>
-        </div>
+        {cart.list.length > 0 && (
+          <div className="footer">
+            <button
+              disabled={order.loading}
+              onClick={() => {
+                dispatch(addToOrder(cart.list));
+              }}
+              type="button"
+              class="btn btn-warning"
+            >
+              Confirm order
+            </button>
+          </div>
+        )}
       </Container>
     </div>
   );
