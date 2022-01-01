@@ -90,19 +90,19 @@ const OrderView = ({ order, show, onHide }) => {
                 <tbody>
                   <tr>
                     <td>Customer</td>
-                    <td>{order.user.name}</td>
+                    <td>{order?.user?.name}</td>
                   </tr>
                   <tr>
                     <td>Address</td>
-                    <td>{order.user.address}</td>
+                    <td>{order?.user?.address}</td>
                   </tr>
                   <tr>
                     <td>Phone</td>
-                    <td>{order.user.phone}</td>
+                    <td>{order?.user?.phone}</td>
                   </tr>
                   <tr>
                     <td>Status</td>
-                    <td>{order.status}</td>
+                    <td>{order?.status}</td>
                   </tr>
                 </tbody>
               </Table>

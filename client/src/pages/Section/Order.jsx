@@ -15,9 +15,9 @@ const Order = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (user && user.data.type === "customer") {
+    if (user && user?.data?.type === "customer") {
       dispatch(fetchUserOrders(user.data.id));
-    } else if (user.data.type === "admin") {
+    } else if (user?.data?.type === "admin") {
       dispatch(fetchOrders());
     }
   }, [user]);

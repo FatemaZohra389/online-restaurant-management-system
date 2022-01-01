@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./Section.css";
 import Home from "./Home";
 import Menu from "./Menu";
@@ -7,24 +7,25 @@ import About from "./About";
 import Cart from "./Cart";
 import Order from "./Order";
 import Navbar from "../Navbar/Navbar";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
-export class Section extends Component {
-  render() {
-    return (
-      <>
-        <Navbar />
-        <Routes>
-          <Route path="/home" element={<Home />} />
+const Section = () => {
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <>
+          <Route path="home" element={<Home />} />
           <Route path="menu" element={<Menu />} />
           <Route path="contact" element={<Contact />} />
           <Route path="about" element={<About />} />
           <Route path="cart" element={<Cart />} />
           <Route path="order" element={<Order />} />
-        </Routes>
-      </>
-    );
-  }
-}
+          <Route path="*" element={<Navigate to="home" />} />
+        </>
+      </Routes>
+    </>
+  );
+};
 
 export default Section;

@@ -18,11 +18,11 @@ const Navbar = () => {
       <NavBar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container fluid>
           <Nav navbarScroll className="me-auto">
-            {user.data.type !== "admin" && (
+            {user?.data?.type !== "admin" && (
             <Nav.Link href="/home">Home</Nav.Link>
             )}
             <Nav.Link href="/menu">Menu</Nav.Link>
-            {user.data.type !== "admin" && (
+            {user?.data?.type !== "admin" && (
               <Nav.Link href="/cart">Cart</Nav.Link>
             )}
             <Nav.Link href="/order">Order</Nav.Link>
