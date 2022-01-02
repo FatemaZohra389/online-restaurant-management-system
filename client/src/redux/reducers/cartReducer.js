@@ -37,10 +37,14 @@ export const addMenuToCart = (menu) => async (dispatch, getState) => {
   temp = temp.map((item) => {
     if (item.id === menu.id) {
       found = true;
-      return {
-        ...menu,
-        qty: item.qty + 1,
-      };
+      if (item.qty < 50) {
+        return {
+          ...menu,
+          qty: item.qty + 1,
+        };
+      } else {
+        return item;
+      }
     } else {
       return item;
     }

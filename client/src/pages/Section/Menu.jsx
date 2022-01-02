@@ -40,7 +40,7 @@ function Menu() {
       {user.data.type === "customer" && (
         <Row xs={1} md={12} className="g-4">
           {list.map((menu, idx) => (
-            <Col key={menu.id} md={2}>
+            <Col key={menu.id} md={3}>
               <Card>
                 <Card.Img variant="top" src={menu.photo} />
                 <Card.Body>

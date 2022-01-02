@@ -2,8 +2,16 @@ import "./Home.scss";
 import img4 from "../../assets/images/img4.png";
 import { Image, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import DashboardPage from "../Dashboard/DashboardPage";
+
 function HomePage() {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  if (user && user.data.type === "admin") {
+    return <DashboardPage />;
+  }
+  
   return (
     <>
       <div>
@@ -11,9 +19,11 @@ function HomePage() {
           <Row>
             <Col md={6}>
               <Image
-                style={{
-                  // maxWidth: 550,
-                }}
+                style={
+                  {
+                    // maxWidth: 550,
+                  }
+                }
                 fluid
                 src={img4}
                 alt=""
