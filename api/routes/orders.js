@@ -6,6 +6,7 @@ const orders = require("../controllers/order.controller");
 router.get("/", orders.findAll);
 router.get("/user/:userId", orders.findByUser);
 router.post("/", orders.create);
+router.patch("/review", orders.giveReview);
 router.patch("/", orders.update);
 
 // router.get("/:id", menus.findById);

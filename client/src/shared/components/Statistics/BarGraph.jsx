@@ -6,11 +6,11 @@ import {
   XAxis,
   Tooltip,
   YAxis,
-  Legend,
+  // Legend,
   Bar,
 } from "recharts";
 
-const BarGraph = ({ data }) => {
+const BarGraph = ({ data, color = "#FFBB28" }) => {
   return (
     <div>
       <ResponsiveContainer width="99%" aspect={3}>
@@ -25,7 +25,7 @@ const BarGraph = ({ data }) => {
           <YAxis />
           <Tooltip />
           {/* <Legend /> */}
-          <Bar dataKey="order" fill="#8884d8" />
+          <Bar dataKey="order" fill={color} />
         </BarChart>
       </ResponsiveContainer>
     </div>

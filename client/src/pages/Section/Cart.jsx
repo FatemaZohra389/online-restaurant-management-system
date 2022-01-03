@@ -6,18 +6,17 @@ import {
   removeMenuFromCart,
   decreaseQtyFromCart,
 } from "../../redux/reducers/cartReducer";
-
-import { addToOrder } from "../../redux/reducers/orderReducer";
+// import { addToOrder } from "../../redux/reducers/orderReducer";
 import { AiFillDelete } from "react-icons/ai";
 import "./Cart.scss";
+import ConfirmOrderModal from "../../shared/components/Modal/ConfirmOrderModal";
 
 export const Cart = () => {
+  const [show, setShow] = React.useState(false);
   const cart = useSelector((state) => state.cart);
   const order = useSelector((state) => state.order);
   const dispatch = useDispatch();
-  console.log({
-    cart,
-  });
+
   const getTotalPrice = () => {
     let total = 0;
     cart.list.forEach((element) => {
@@ -79,7 +78,6 @@ export const Cart = () => {
                     >
                       +
                     </Button>
-
                     {/* <button onClick={() => dispatch(reset())}>Reset</button> */}
                     {/* <button onClick={() => dispatch(decrement())}>Decrease</button> */}
                   </td>
@@ -115,21 +113,29 @@ export const Cart = () => {
             </tr>
           </tfoot>
         </Table>
-        {cart.list.length > 0 && (
+        {cart?.list?.length > 0 && (
           <div className="footer">
             <button
               disabled={order.loading}
               onClick={() => {
-                dispatch(addToOrder(cart.list));
+                // dispatch(addToOrder(cart.list));
+                setShow(true);
               }}
               type="button"
               class="btn btn-warning"
             >
-              Confirm order
+              Confirm Order
             </button>
           </div>
         )}
       </Container>
+      {show && (
+        <ConfirmOrderModal
+          data={cart.list}
+          show={show}
+          onHide={() => setShow(false)}
+        />
+      )}
     </div>
   );
 };

@@ -12,4 +12,12 @@ module.exports = (sequelize, Sequelize) =>
       type: Sequelize.STRING,
       allowNull: false,
     },
+    review: {
+      type: Sequelize.TEXT,
+      allowNull: true,
+    },
+    paymentType: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+    },
   });

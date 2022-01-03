@@ -94,6 +94,33 @@ exports.create = async (req, res) => {
   }
 };
 
+exports.giveReview = async (request, res) => {
+  const params = request.body;
+  const { review, orderId } = params;
+  
+  try {
+    const order = await Order.findOne({ where: { id: orderId } });
+    if (order) {
+      const data = await order.update({ review: review }); // database update query where id = 1/2/3/4
+      res.send({
+        ...order,
+        review,
+      });
+    } else {
+      // send data to frontend
+      res.status(404).send({
+        message: "No order found",
+      });
+    }
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({
+      error: e,
+      message: e.message || "Unexpected error",
+    });
+  }
+};
+
 exports.update = async (request, res) => {
   const params = request.body;
   const { status, id } = params;

@@ -61,13 +61,13 @@ export const fetchUserOrders = (userId) => async (dispatch, getState) => {
     });
 };
 
-export const addToOrder = (cart) => async (dispatch, getState) => {
+export const addToOrder = (cart, address) => async (dispatch, getState) => {
   const user = getState().user;
   console.log(user);
   console.log(cart);
   const params = {
     userId: user.data.id,
-    address: user.data.address,
+    address: address,
     status: "Placed",
     carts: cart,
   };
