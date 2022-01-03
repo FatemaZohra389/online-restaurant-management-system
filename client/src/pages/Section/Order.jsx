@@ -217,6 +217,7 @@ const Order = () => {
               <tr>
                 <th>Serial</th>
                 <th>Order ID</th>
+                {user?.data?.type === "admin" && <th>Customer</th>}
                 <th>Date</th>
                 <th>Address</th>
                 <th>Total Price</th>
@@ -231,6 +232,7 @@ const Order = () => {
                   <tr>
                     <td>{index + 1}</td>
                     <td>{item?.id}</td>
+                    {user?.data?.type === "admin" && <th>{item?.user?.username}</th>}
                     <td>{new Date(item?.createdAt).toLocaleString()}</td>
                     <td>{item?.address}</td>
                     <td>${getTotalPrice(item?.carts)}</td>
