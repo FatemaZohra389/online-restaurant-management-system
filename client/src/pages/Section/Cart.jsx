@@ -33,7 +33,7 @@ export const Cart = () => {
       <hr />
 
       <Container fluid>
-        <Table striped borderless hover responsive size="sm">
+        <Table striped bordered variant="warning" hover responsive size="sm">
           <thead>
             <tr>
               <th>Serial</th>

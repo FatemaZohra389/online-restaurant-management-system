@@ -205,7 +205,14 @@ const Order = () => {
               </Button>
             </div>
           )}
-          <Table bordered hover responsive size="sm" className="capture">
+          <Table
+            variant={user?.data?.type === "admin" ? "light" : "warning"}
+            bordered
+            hover
+            responsive
+            size="sm"
+            className="capture"
+          >
             <thead>
               <tr>
                 <th>Serial</th>

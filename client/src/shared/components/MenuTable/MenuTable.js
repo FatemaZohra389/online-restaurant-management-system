@@ -45,7 +45,7 @@ export const MenuTable = () => {
       <hr />
       <Container fluid>
         <div className="w-100 text-right d-flex justify-content-end mb-2"></div>
-        <Table size="sm" striped borderless hover responsive>
+        <Table size="sm" striped bordered variant="warning" hover responsive>
           <thead>
             <tr>
               <th>Serial</th>
@@ -72,17 +72,19 @@ export const MenuTable = () => {
                   <td className="align-middle">{menu.name}</td>
                   <td className="align-middle">${menu.price}</td>
                   <td width="10%" className="text-center align-middle">
-                    <div className="d-flex flex-row justify-content-around">
-                      <Button
-                        size="sm"
-                        variant="danger"
-                        onClick={() => {
-                          // dispatch(removeMenuFromCart(menu));
-                          dispatch(deleteMenu(menu));
-                        }}
-                      >
-                        <AiFillDelete />
-                      </Button>
+                    <div className="d-flex flex-row justify-content-center">
+                      <div style={{marginRight: 5}}>
+                        <Button
+                          size="sm"
+                          variant="danger"
+                          onClick={() => {
+                            // dispatch(removeMenuFromCart(menu));
+                            dispatch(deleteMenu(menu));
+                          }}
+                        >
+                          <AiFillDelete />
+                        </Button>
+                      </div>
                       <Button
                         size="sm"
                         onClick={() => {
