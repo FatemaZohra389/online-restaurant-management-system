@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Container, Button } from "react-bootstrap";
 import "./Order.scss";
-import { AiFillEye } from "react-icons/ai";
+import { AiFillEye, AiFillPrinter } from "react-icons/ai";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import {
@@ -37,8 +37,8 @@ const _exportPdf = () => {
     const canvasHeight = canvas.height * ratio;
 
     const marginX = (pageWidth - canvasWidth) / 2;
-    const marginY = (pageHeight - canvasHeight) / 2;
-    pdf.addImage(imgData, "PNG", marginX, marginY, canvasWidth, canvasHeight);
+    // const marginY = (pageHeight - canvasHeight) / 2;
+    pdf.addImage(imgData, "PNG", marginX, 0, canvasWidth, canvasHeight);
     pdf.save("order_report.pdf");
   });
 };
@@ -60,7 +60,7 @@ const Order = () => {
     if (user && user?.data?.type === "admin") {
       dispatch(fetchCustomers());
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {
@@ -69,7 +69,7 @@ const Order = () => {
     } else if (user?.data?.type === "admin") {
       dispatch(fetchOrders());
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const getTotalPrice = (carts) => {
@@ -197,7 +197,12 @@ const Order = () => {
                   }}
                 />
               </div>
-              <Button onClick={() => _exportPdf()}>Print</Button>
+              <Button variant="info" onClick={() => _exportPdf()}>
+                <span>
+                  <AiFillPrinter />
+                  &nbsp;Print
+                </span>
+              </Button>
             </div>
           )}
           <Table bordered hover responsive size="sm" className="capture">

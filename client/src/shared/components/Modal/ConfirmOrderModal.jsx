@@ -8,11 +8,13 @@ import {
 } from "react-bootstrap";
 import { addToOrder } from "../../../redux/reducers/orderReducer";
 import { useSelector, useDispatch } from "react-redux";
+import { useToasts } from "react-toast-notifications";
 
 const ConfirmOrderModal = ({ data, show, onHide, onConfirm }) => {
   const user = useSelector((state) => state.user);
   const [address, setAddress] = React.useState("");
   const dispatch = useDispatch();
+  const { addToast } = useToasts();
 
   useEffect(() => {
     setAddress(user.data.address);
@@ -69,6 +71,10 @@ const ConfirmOrderModal = ({ data, show, onHide, onConfirm }) => {
             onClick={() => {
               dispatch(addToOrder(data, address));
               onHide(false);
+              addToast("Order Placed!", {
+                appearance: "success",
+                autoDismiss: true,
+              });
             }}
           >
             Confirm
