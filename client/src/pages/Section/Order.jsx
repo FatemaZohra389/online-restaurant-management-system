@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Container, Button } from "react-bootstrap";
 import "./Order.scss";
-import { AiFillEye, AiFillPrinter } from "react-icons/ai";
+import { AiFillEye, AiFillPrinter, AiFillEdit } from "react-icons/ai";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import {
@@ -243,7 +243,11 @@ const Order = () => {
                               setSelectedOrder(item);
                             }}
                           >
-                            <AiFillEye />
+                            {user?.data?.type === "admin" ? (
+                              <AiFillEdit />
+                            ) : (
+                              <AiFillEye />
+                            )}
                           </Button>
                           {item?.status === "Complete" &&
                             !item?.review &&

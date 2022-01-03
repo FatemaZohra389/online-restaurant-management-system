@@ -34,6 +34,31 @@ const OrderView = ({ order, show, onHide }) => {
       </Modal.Header>
       <Modal.Body>
         <Container fluid>
+          {user.data.type === "admin" && (
+            <Card className="mb-3">
+              <Card.Body>
+                <Form.Group className="mb-2">
+                  <Form.Label>
+                    <b>Change Status</b>
+                  </Form.Label>
+                  <Form.Select
+                    onChange={(e) => {
+                      updateStatus(e.target.value);
+                    }}
+                    defaultValue={order.status}
+                    aria-label="Default select example"
+                  >
+                    <option value="Placed">Placed</option>
+                    <option value="Confirm">Confirm</option>
+                    <option value="Prepared">Prepared</option>
+                    <option value="Delivered">Delivered</option>
+                    <option value="Complete">Complete</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </Form.Select>
+                </Form.Group>
+              </Card.Body>
+            </Card>
+          )}
           <Table bordered hover responsive size="sm" variant="light">
             <thead>
               <tr>
@@ -94,7 +119,7 @@ const OrderView = ({ order, show, onHide }) => {
                   </tr>
                   <tr>
                     <td>Address</td>
-                    <td>{order?.user?.address}</td>
+                    <td><b>{order?.address}</b></td>
                   </tr>
                   <tr>
                     <td>Phone</td>
@@ -102,35 +127,12 @@ const OrderView = ({ order, show, onHide }) => {
                   </tr>
                   <tr>
                     <td>Status</td>
-                    <td>{order?.status}</td>
+                    <td><b>{order?.status}</b></td>
                   </tr>
                 </tbody>
               </Table>
             </Card.Body>
           </Card>
-          {user.data.type === "admin" && (
-            <Card className="mt-3">
-              <Card.Body>
-                <Form.Group className="mb-2">
-                  <Form.Label> Status</Form.Label>
-                  <Form.Select
-                    onChange={(e) => {
-                      updateStatus(e.target.value);
-                    }}
-                    defaultValue={order.status}
-                    aria-label="Default select example"
-                  >
-                    <option value="Placed">Placed</option>
-                    <option value="Confirm">Confirm</option>
-                    <option value="Prepared">Prepared</option>
-                    <option value="Delivered">Delivered</option>
-                    <option value="Complete">Complete</option>
-                    <option value="Cancelled">Cancelled</option>
-                  </Form.Select>
-                </Form.Group>
-              </Card.Body>
-            </Card>
-          )}
         </Container>
       </Modal.Body>
     </Modal>
