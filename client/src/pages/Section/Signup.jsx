@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { InputGroup, FormControl } from "react-bootstrap";
 import { BsPersonCircle } from "react-icons/bs";
 import { MdLocationOn, MdPhone } from "react-icons/md";
@@ -67,10 +67,15 @@ const Signup = () => {
         })
         .catch((e) => {
           console.log({ e });
-          addToast(e?.response?.data?.error?.errors[0]?.message || e?.message || "Unexpected Error!", {
-            appearance: "error",
-            autoDismiss: true,
-          });
+          addToast(
+            e?.response?.data?.error?.errors[0]?.message ||
+              e?.message ||
+              "Unexpected Error!",
+            {
+              appearance: "error",
+              autoDismiss: true,
+            }
+          );
         })
         .finally(() => {
           setLoading(false);
@@ -172,6 +177,10 @@ const Signup = () => {
               </InputGroup>
             </div>
             <div>
+              <div className="d-flex justify-content-end w-100 mt-4">
+                {/* Forget password? */}
+                <Link to="/">Already have an account? Login</Link>
+              </div>
               <PinkButton
                 loading={loading}
                 onClick={onClickSignUp}

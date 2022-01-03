@@ -101,8 +101,8 @@ const LoginPage = () => {
               {/* <label className="label">Password</label>
               <input className="input" type="text" name="password" /> */}
             </div>
-            <div className="d-flex justify-content-between">
-              Forget password?
+            <div className="d-flex justify-content-end w-100">
+              {/* Forget password? */}
               <Link to="/signup">Create an account</Link>
             </div>
             <div>
