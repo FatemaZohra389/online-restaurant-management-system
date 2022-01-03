@@ -222,6 +222,7 @@ const Order = () => {
                 <th>Address</th>
                 <th>Total Price</th>
                 <th>Status</th>
+                {user?.data?.type === "admin" && <th>Payment Method</th>}
                 <th>Review</th>
                 <th className="text-center">Actions</th>
               </tr>
@@ -232,11 +233,14 @@ const Order = () => {
                   <tr>
                     <td>{index + 1}</td>
                     <td>{item?.id}</td>
-                    {user?.data?.type === "admin" && <th>{item?.user?.username}</th>}
+                    {user?.data?.type === "admin" && (
+                      <td>{item?.user?.username}</td>
+                    )}
                     <td>{new Date(item?.createdAt).toLocaleString()}</td>
                     <td>{item?.address}</td>
                     <td>${getTotalPrice(item?.carts)}</td>
                     <td>{item?.status}</td>
+                    {user?.data?.type === "admin" && <td>Cash on Delivery</td>}
                     <td>{item?.review}</td>
                     <td>
                       <td width="2%" className="text-center">
