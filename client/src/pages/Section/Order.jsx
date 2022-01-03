@@ -11,6 +11,17 @@ import {
 } from "../../redux/reducers/orderReducer";
 import OrderView from "../../shared/components/Order/OrderView";
 import OrderReviewModal from "../../shared/components/Order/OrderReviewModal";
+import { fetchCustomers } from "../../redux/reducers/customerReducer";
+import Select from "react-select";
+
+const orderStatusList = [
+  { value: "Placed", label: "Placed" },
+  { value: "Confirm", label: "Confirm" },
+  { value: "Prepared", label: "Prepared" },
+  { value: "Delivered", label: "Delivered" },
+  { value: "Complete", label: "Complete" },
+  { value: "Cancelled", label: "Cancelled" },
+];
 
 const _exportPdf = () => {
   html2canvas(document.querySelector(".capture")).then((canvas) => {
@@ -34,11 +45,23 @@ const _exportPdf = () => {
 
 const Order = () => {
   const [view, setView] = useState(false);
+  const [customerId, setCustomerId] = useState(null);
+  const [orderId, setOrderId] = useState(null);
+  const [status, setStatus] = useState(null);
+
   const [showReview, setShowReview] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const orders = useSelector((state) => state.order);
   const user = useSelector((state) => state.user);
+  const customer = useSelector((state) => state.customer);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user && user?.data?.type === "admin") {
+      dispatch(fetchCustomers());
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   useEffect(() => {
     if (user && user?.data?.type === "customer") {
@@ -46,6 +69,7 @@ const Order = () => {
     } else if (user?.data?.type === "admin") {
       dispatch(fetchOrders());
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const getTotalPrice = (carts) => {
@@ -63,6 +87,34 @@ const Order = () => {
     setSelectedOrder(null);
   };
 
+  const styles = {
+    control: (css) => ({
+      ...css,
+      width: 200,
+    }),
+    menu: ({ width, ...css }) => ({
+      ...css,
+      width: "max-content",
+      minWidth: "100%",
+    }),
+    // Add padding to account for width of Indicators Container plus padding
+    option: (css) => ({ ...css, width: "100%" }),
+  };
+
+  const updateList = (customerId, status, orderId) => {
+    let params = {};
+    if (customerId) {
+      params.customerId = customerId;
+    }
+    if (status) {
+      params.status = status;
+    }
+    if (orderId) {
+      params.orderId = orderId;
+    }
+    dispatch(fetchOrders(params));
+  };
+
   return (
     <>
       <div className="cart-page">
@@ -76,8 +128,75 @@ const Order = () => {
               style={{
                 marginTop: 5,
                 marginBottom: 5,
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
               }}
             >
+              <div className="d-flex flex-row flex-wrap justify-content-start">
+                <div style={{ marginRight: 5 }}>
+                  <Select
+                    autoSize={false}
+                    styles={styles}
+                    isSearchable
+                    isClearable
+                    options={customer.list.map((customer) => ({
+                      value: customer.id,
+                      label: customer.username,
+                    }))}
+                    placeholder="Select Customer"
+                    onChange={(value) => {
+                      if (value && value.value) {
+                        setCustomerId(value.value);
+                        updateList(value.value, status, orderId);
+                      } else {
+                        setCustomerId(null);
+                        updateList(null, status, orderId);
+                      }
+                    }}
+                  />
+                </div>
+                <div style={{ marginRight: 5 }}>
+                  <Select
+                    autoSize={false}
+                    styles={styles}
+                    isSearchable
+                    isClearable
+                    options={orderStatusList}
+                    placeholder="Select Status"
+                    onChange={async (value) => {
+                      if (value && value.value) {
+                        setStatus(value.value);
+                        updateList(customerId, value.value, orderId);
+                      } else {
+                        setStatus(null);
+                        updateList(customerId, null, orderId);
+                      }
+                    }}
+                  />
+                </div>
+                <Select
+                  autoSize={false}
+                  styles={styles}
+                  isSearchable
+                  isClearable
+                  options={orders?.list.map((item) => ({
+                    value: item.id,
+                    label: item.id,
+                  }))}
+                  placeholder="Select Order"
+                  onChange={(value) => {
+                    if (value && value.value) {
+                      setOrderId(value.value);
+                      updateList(customerId, status, value.value);
+                    } else {
+                      setOrderId(null);
+                      updateList(customerId, status, null);
+                    }
+                  }}
+                />
+              </div>
               <Button onClick={() => _exportPdf()}>Print</Button>
             </div>
           )}

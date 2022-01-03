@@ -29,21 +29,23 @@ export const { updateOrderList, startLoading, stopLoading } =
 
 export default orderSlice.reducer;
 
-export const fetchOrders = () => async (dispatch, getState) => {
-  dispatch(startLoading());
-  axios
-    .get("http://localhost:5000/orders")
-    .then(function (response) {
-      // handle success
-      dispatch(updateOrderList(response.data));
-    })
-    .catch(function (error) {
-      // handle error
-    })
-    .finally(() => {
-      dispatch(stopLoading());
-    });
-};
+export const fetchOrders =
+  (params = {}) =>
+  async (dispatch, getState) => {
+    dispatch(startLoading());
+    axios
+      .get("http://localhost:5000/orders", { params: { ...params } })
+      .then(function (response) {
+        // handle success
+        dispatch(updateOrderList(response.data));
+      })
+      .catch(function (error) {
+        // handle error
+      })
+      .finally(() => {
+        dispatch(stopLoading());
+      });
+  };
 
 export const fetchUserOrders = (userId) => async (dispatch, getState) => {
   dispatch(startLoading());
@@ -63,8 +65,6 @@ export const fetchUserOrders = (userId) => async (dispatch, getState) => {
 
 export const addToOrder = (cart, address) => async (dispatch, getState) => {
   const user = getState().user;
-  console.log(user);
-  console.log(cart);
   const params = {
     userId: user.data.id,
     address: address,

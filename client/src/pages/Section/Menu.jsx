@@ -26,6 +26,7 @@ function Menu() {
 
   useEffect(() => {
     dispatch(fetchMenu());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
