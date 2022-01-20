@@ -5,6 +5,7 @@ const initialState = {
   list: [],
   loading: false,
   error: false,
+  filters: null,
 };
 
 const menuSlice = createSlice({
@@ -14,16 +15,23 @@ const menuSlice = createSlice({
     updateMenuList(state, action) {
       state.list = [...action.payload];
     },
+    setFilters(state, action) {
+      state.filters = { ...action.payload };
+    },
+    clearFilters(state, action) {
+      state.filters = null;
+    },
   },
 });
 
-export const { updateMenuList } = menuSlice.actions;
+export const { updateMenuList, setFilters } = menuSlice.actions;
 
 export default menuSlice.reducer;
 
 export const fetchMenu = () => async (dispatch, getState) => {
+  const filters = getState().menu.filters;
   axios
-    .get("http://localhost:5000/menus")
+    .get("http://localhost:5000/menus", { params: { ...filters } })
     .then(function (response) {
       // handle success
       dispatch(updateMenuList(response.data));
@@ -32,6 +40,15 @@ export const fetchMenu = () => async (dispatch, getState) => {
       // handle error
     });
 };
+
+export const setMenuFilters =
+  (params = {}) =>
+  async (dispatch, getState) => {
+    dispatch(setFilters({ ...params }));
+    setTimeout(() => {
+      dispatch(fetchMenu());
+    }, 5);
+  };
 
 export const addMenu = (menu) => async (dispatch, getState) => {
   return new Promise((resolve, reject) => {

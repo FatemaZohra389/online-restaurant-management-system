@@ -20,6 +20,9 @@ const Navbar = () => {
           <Nav navbarScroll className="me-auto">
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/menu">Menu</Nav.Link>
+            {user?.data?.type === "admin" && (
+              <Nav.Link href="/category">Category</Nav.Link>
+            )}
             {user?.data?.type !== "admin" && (
               <Nav.Link href="/cart">Cart</Nav.Link>
             )}

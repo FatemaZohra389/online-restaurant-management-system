@@ -14,6 +14,18 @@ exports.findAll = async (req, res) => {
   }
 };
 
+exports.findAllCustomers = async (req, res) => {
+  try {
+    const data = await User.findAll({ where: { type: "customer" } });
+    res.send(data);
+  } catch (e) {
+    res.status(500).send({
+      error: e,
+      message: e.message || "Unexpected error",
+    });
+  }
+};
+
 // * Login User
 exports.login = async (req, res) => {
   const { username, password } = req.body;
@@ -47,7 +59,14 @@ exports.login = async (req, res) => {
 
 // * Register User
 exports.register = async (req, res) => {
-  const { username, name, password, address, phone, type = "customer" } = req.body;
+  const {
+    username,
+    name,
+    password,
+    address,
+    phone,
+    type = "customer",
+  } = req.body;
   if (!username || !password || !name || !address || !phone) {
     res.status(400).send({
       message: "Fields can not be empty!",

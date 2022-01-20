@@ -15,6 +15,7 @@ export const MenuTable = () => {
     name: "",
     price: 0,
     photo: null,
+    categoryId: null,
   });
 
   const onHideModal = () => {
@@ -36,6 +37,7 @@ export const MenuTable = () => {
               name: "",
               price: 0,
               photo: null,
+              categoryId: null,
             });
           }}
         >
@@ -52,6 +54,7 @@ export const MenuTable = () => {
               <th>Image</th>
               <th>Name</th>
               <th>Price</th>
+              <th>Category</th>
               <th className="text-center">Actions</th>
             </tr>
           </thead>
@@ -71,9 +74,10 @@ export const MenuTable = () => {
                   </td>
                   <td className="align-middle">{menu.name}</td>
                   <td className="align-middle">${menu.price}</td>
+                  <td className="align-middle">{menu?.category?.name}</td>
                   <td width="10%" className="text-center align-middle">
                     <div className="d-flex flex-row justify-content-center">
-                      <div style={{marginRight: 5}}>
+                      <div style={{ marginRight: 5 }}>
                         <Button
                           size="sm"
                           variant="danger"
@@ -94,6 +98,7 @@ export const MenuTable = () => {
                             name: menu.name,
                             price: menu.price,
                             photo: menu.photo,
+                            categoryId: menu.categoryId,
                           });
                         }}
                         type="button"

@@ -1,6 +1,8 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import Select from "react-select";
 import { addMenu, updateMenu } from "../../../redux/reducers/menuReducer";
 import "./Modal.scss";
 
@@ -11,6 +13,15 @@ function MenuModal({ onHide, show, menu }) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [photo, setPhoto] = useState(null);
+  const [category, setCategory] = useState(null);
+
+  const [categories, setCategories] = useState(null);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/categories").then((res) => {
+      setCategories(res.data);
+    });
+  }, []);
 
   const onSubmit = () => {
     if (name && photo && price) {
@@ -21,6 +32,7 @@ function MenuModal({ onHide, show, menu }) {
             name: name,
             photo: photo,
             price: price,
+            categoryId: category,
           })
         ).then((res) => {
           onHide();
@@ -31,6 +43,7 @@ function MenuModal({ onHide, show, menu }) {
             name: name,
             photo: photo,
             price: price,
+            categoryId: category,
           })
         ).then((res) => {
           onHide();
@@ -40,11 +53,15 @@ function MenuModal({ onHide, show, menu }) {
   };
 
   useEffect(() => {
+    // console.log(menu);
     setName(menu.name);
     setPhoto(menu.photo);
     setPrice(menu.price);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    setCategory(menu.categoryId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // console.log(menu);
 
   /**
    * Convert image to base64
@@ -100,6 +117,35 @@ function MenuModal({ onHide, show, menu }) {
                   }}
                   accept="image/png, image/gif, image/jpeg"
                 />
+              </Form.Group>
+              <Form.Group className="my-2">
+                <Form.Label>Category</Form.Label>
+                {categories && (
+                  <Select
+                    autoSize={false}
+                    // styles={styles}
+                    isSearchable
+                    isClearable
+                    options={categories?.map((item) => ({
+                      value: item.id,
+                      label: item.name,
+                    }))}
+                    value={categories?.map((item) => ({
+                      value: item.id,
+                      label: item.name,
+                    })).filter((item) => item.value === category)}
+                    placeholder="Select Category"
+                    onChange={(value) => {
+                      if (value && value.value) {
+                        setCategory(value.value);
+                        // updateList(customerId, status, value.value);
+                      } else {
+                        setCategory(null);
+                        // updateList(customerId, status, null);
+                      }
+                    }}
+                  />
+                )}
               </Form.Group>
             </Form>
           </>

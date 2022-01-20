@@ -6,18 +6,34 @@ const Menu = db.menus;
 const User = db.users;
 
 exports.findAll = async (req, res) => {
+  const query = req.query;
+  console.log({ query });
+  let params = {};
+  if (query.customerId) {
+    params.userId = query.customerId;
+  }
+  if (query.status) {
+    params.status = query.status;
+  }
+  if (query.orderId) {
+    params.id = query.orderId;
+  }
+  let sqlQuery = {
+    order: [["id", "DESC"]],
+    include: [
+      {
+        as: "carts",
+        model: Cart,
+        include: [Menu],
+      },
+      User,
+    ],
+  };
+  if (params) {
+    sqlQuery.where = params;
+  }
   try {
-    let orderData = await Order.findAll({
-      order: [["id", "DESC"]],
-      include: [
-        {
-          as: "carts",
-          model: Cart,
-          include: [Menu],
-        },
-        User,
-      ],
-    });
+    let orderData = await Order.findAll(sqlQuery);
     res.send(orderData);
   } catch (e) {
     res.status(500).send({
@@ -97,7 +113,7 @@ exports.create = async (req, res) => {
 exports.giveReview = async (request, res) => {
   const params = request.body;
   const { review, orderId } = params;
-  
+
   try {
     const order = await Order.findOne({ where: { id: orderId } });
     if (order) {

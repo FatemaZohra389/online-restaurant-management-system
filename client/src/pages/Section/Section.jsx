@@ -8,6 +8,7 @@ import Cart from "./Cart";
 import Order from "./Order";
 import Navbar from "../Navbar/Navbar";
 import { Route, Routes, Navigate } from "react-router-dom";
+import Category from "./Category";
 
 const Section = () => {
   return (
@@ -17,6 +18,7 @@ const Section = () => {
         <>
           <Route path="home" element={<Home />} />
           <Route path="menu" element={<Menu />} />
+          <Route path="category" element={<Category />} />
           <Route path="contact" element={<Contact />} />
           <Route path="about" element={<About />} />
           <Route path="cart" element={<Cart />} />

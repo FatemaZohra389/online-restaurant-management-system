@@ -22,12 +22,23 @@ db.users = require("./user.model")(sequelize, Sequelize);
 db.menus = require("./menu.model")(sequelize, Sequelize);
 db.orders = require("./order.model")(sequelize, Sequelize);
 db.carts = require("./cart.model")(sequelize, Sequelize);
+db.categories = require("./category.model")(sequelize, Sequelize);
 
 db.users.hasMany(db.orders, {
   as: "orders",
 });
 db.orders.belongsTo(db.users, {
   onDelete: "CASCADE",
+  foreignKey: { allowNull: false },
+  hooks: true,
+});
+
+db.categories.hasMany(db.menus, {
+  as: "menus",
+});
+
+db.menus.belongsTo(db.categories, {
+  onDelete: "RESTRICT",
   foreignKey: { allowNull: false },
   hooks: true,
 });

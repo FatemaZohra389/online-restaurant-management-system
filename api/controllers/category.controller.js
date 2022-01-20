@@ -1,26 +1,11 @@
 const db = require("../models");
 
-const Menu = db.menus;
 const Category = db.categories;
-const { Op } = db.Sequelize;
+// const { Op } = db.Sequelize;
 
 exports.findAll = async (req, res) => {
-  const query = req.query;
-  console.log({ query });
-  let sqlQuery = { include: [Category] };
-  let params = {};
-  if (query.categoryId) {
-    params.categoryId = query.categoryId;
-  }
-  if (query.searchValue) {
-    params.name = { [Op.like]: "%" + query.searchValue + "%" };
-  }
-  if (params) {
-    sqlQuery.where = params;
-  }
-  console.log({ sqlQuery });
   try {
-    const data = await Menu.findAll(sqlQuery);
+    const data = await Category.findAll();
     res.send(data);
   } catch (e) {
     res.status(500).send({
@@ -30,17 +15,70 @@ exports.findAll = async (req, res) => {
   }
 };
 
-exports.create = async (req, res) => {
+exports.createCategory = async (req, res) => {
+  const params = req.body;
   try {
-    const data = await Menu.findAll();
+    const data = await Category.create(params);
     res.send(data);
   } catch (e) {
+    console.error(e);
     res.status(500).send({
       error: e,
       message: e.message || "Unexpected error",
     });
   }
 };
+
+exports.updateCategory = async (request, res) => {
+  const params = request.body;
+  try {
+    const data = await Category.update(params, { where: { id: params.id } }); // database update query where id = 1/2/3/4
+    if (data[0] > 0) {
+      // In data, it shows the number of rows update in an array; [ 0 ] if no rows updated
+      const menuData = await Category.findOne({
+        // run database get query where id = 1/2/3/4
+        where: {
+          id: params.id,
+        },
+      });
+      res.send(menuData); // send data to frontend
+    } else {
+      res.send({
+        message: "No Category updated",
+      });
+    }
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({
+      error: e,
+      message: e.message || "Unexpected error",
+    });
+  }
+};
+
+exports.remove = async (req, res) => {
+  const params = req.params;
+  try {
+    const data = await Category.destroy({ where: { id: params.id } });
+    if (data) {
+      res.send({
+        message: "Category deleted",
+      });
+    } else {
+      res.send({
+        message: "Category was not found / failed to delete",
+      });
+    }
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({
+      error: e,
+      message: e.message || "Unexpected error",
+    });
+  }
+};
+
+/* 
 
 exports.findById = async (request, res) => {
   const params = request.params;
@@ -127,4 +165,4 @@ exports.removeMenu = async (req, res) => {
       message: e.message || "Unexpected error",
     });
   }
-};
+}; */
