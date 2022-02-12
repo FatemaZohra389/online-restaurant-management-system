@@ -13,6 +13,7 @@ import OrderView from "../../shared/components/Order/OrderView";
 import OrderReviewModal from "../../shared/components/Order/OrderReviewModal";
 import { fetchCustomers } from "../../redux/reducers/customerReducer";
 import Select from "react-select";
+import axios from "axios";
 
 const orderStatusList = [
   { value: "Placed", label: "Placed" },
@@ -71,6 +72,16 @@ const Order = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
+
+  const updateStatus = (order, status) => {
+    axios
+      .patch("http://localhost:5000/orders/receive", {
+        id: order.id,
+      })
+      .then(() => {
+        dispatch(fetchOrders());
+      });
+  };
 
   const getTotalPrice = (carts) => {
     let total = 0;
@@ -265,16 +276,35 @@ const Order = () => {
                           {item?.status === "Complete" &&
                             !item?.review &&
                             user?.data?.type === "customer" && (
-                              <Button
-                                size="sm"
-                                variant="warning"
-                                onClick={() => {
-                                  setSelectedOrder(item);
-                                  setShowReview(true);
-                                }}
-                              >
-                                Give Review
-                              </Button>
+                              <React.Fragment>
+                                <Button
+                                  size="sm"
+                                  variant="warning"
+                                  onClick={() => {
+                                    setSelectedOrder(item);
+                                    setShowReview(true);
+                                  }}
+                                  className="me-1"
+                                >
+                                  Give Review
+                                </Button>
+                              </React.Fragment>
+                            )}
+                          {item?.status === "Delivered" &&
+                            !item?.review &&
+                            user?.data?.type === "customer" && (
+                              <React.Fragment>
+                                <Button
+                                  size="sm"
+                                  variant="info"
+                                  onClick={() => {
+                                    // setSelectedOrder(item);
+                                    updateStatus(item, "Received");
+                                  }}
+                                >
+                                  Receive
+                                </Button>
+                              </React.Fragment>
                             )}
                         </div>
                       </td>

@@ -52,6 +52,7 @@ const OrderView = ({ order, show, onHide }) => {
                     <option value="Confirm">Confirm</option>
                     <option value="Prepared">Prepared</option>
                     <option value="Delivered">Delivered</option>
+                    <option value="Received">Received</option>
                     <option value="Complete">Complete</option>
                     <option value="Cancelled">Cancelled</option>
                   </Form.Select>
