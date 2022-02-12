@@ -7,6 +7,7 @@ router.get("/", orders.findAll);
 router.get("/user/:userId", orders.findByUser);
 router.post("/", orders.create);
 router.patch("/review", orders.giveReview);
+router.patch("/receive", orders.receive);
 router.patch("/", orders.update);
 
 // router.get("/:id", menus.findById);

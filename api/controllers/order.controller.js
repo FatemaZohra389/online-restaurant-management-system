@@ -7,7 +7,6 @@ const User = db.users;
 
 exports.findAll = async (req, res) => {
   const query = req.query;
-  console.log({ query });
   let params = {};
   if (query.customerId) {
     params.userId = query.customerId;
@@ -122,6 +121,34 @@ exports.giveReview = async (request, res) => {
         ...order,
         review,
       });
+    } else {
+      // send data to frontend
+      res.status(404).send({
+        message: "No order found",
+      });
+    }
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({
+      error: e,
+      message: e.message || "Unexpected error",
+    });
+  }
+};
+
+exports.receive = async (request, res) => {
+  const params = request.body;
+  const { id } = params;
+
+  try {
+    const order = await Order.findOne({ where: { id } });
+    if (order) {
+      const data = await order.update({ status: "Received" }); // database update query where id = 1/2/3/4
+      res.send({
+        ...order,
+        status: "Received",
+      });
+      global.io.emit("order-received", { ...order, status: "Received" });
     } else {
       // send data to frontend
       res.status(404).send({

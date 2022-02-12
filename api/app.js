@@ -17,6 +17,7 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
+global.io = io; //added
 server.listen(5001, function () {
   console.log("Server running on port 5001");
 });
