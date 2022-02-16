@@ -57,45 +57,9 @@ function HomePage() {
               </div>
             </Col>
           </Row>
-          {/* <div className="d-flex flex-row flex-wrap justify-content-around align-items-center w-100">
-            <div class="half-width">
-              <Image
-                style={{
-                  maxWidth: 450,
-                }}
-                src={img4}
-                alt=""
-              />
-            </div>
-            <div
-              style={
-                {
-                  // width: "50%",
-                }
-              }
-              class="half-width flex-grow-1"
-            >
-              <h1>
-                <span class="orange-color">Skip</span> The Diet
-              </h1>
-              <h1>
-                Just Eat <span class="orange-color">Healthy</span>
-              </h1>
-              <h1>
-                With <span class="orange-color">Food Valley</span>
-              </h1>
-              <p>Imagine you don't need a diet because we provide </p>
-              <p>healthy and delicious food for you .</p>
-
-              <br></br>
-              <button class="order-link" onClick={() => navigate("/menu")}>
-                Order Here
-              </button>
-            </div>
-          </div> */}
-        </section>
-      </div>
-    </>
+          </section>
+</div>
+          </>
   );
 }
 

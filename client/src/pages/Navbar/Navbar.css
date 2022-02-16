@@ -1,6 +1,6 @@
 header {
 
-        min-height: 70px;
+        min-height: 100px;
         background-color: orange;
         overflow: hidden;
         display: flex;
@@ -15,7 +15,7 @@ header {
 header.ul {
 
         list-style: none;
-        margin-right: 50px;
+        margin-right: 70px;
 
 
 }
@@ -29,7 +29,7 @@ header ul li {
 header ul li a {
 
         text-decoration: none;
-        color: black;
+        color: rgb(34, 204, 216);
         text-transform: uppercase;
         opacity: 0.6;
         padding: 0 15px;

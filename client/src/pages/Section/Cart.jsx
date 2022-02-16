@@ -81,8 +81,8 @@ export const Cart = () => {
                     {/* <button onClick={() => dispatch(reset())}>Reset</button> */}
                     {/* <button onClick={() => dispatch(decrement())}>Decrease</button> */}
                   </td>
-                  <td className="align-middle">${menu.price}</td>
-                  <td className="align-middle">${menu.price * menu.qty}</td>
+                  <td className="align-middle">{menu.price} Tk</td>
+                  <td className="align-middle">{menu.price * menu.qty} Tk</td>
                   <td width="5%" className="text-center align-middle">
                     <Button
                       size="sm"
@@ -107,7 +107,7 @@ export const Cart = () => {
               </td>
               <td>
                 <h5>
-                  <b>${getTotalPrice()}</b>
+                  <b>{getTotalPrice()} Tk </b>
                 </h5>
               </td>
             </tr>

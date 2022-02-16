@@ -25,7 +25,7 @@ function Menu() {
 
   const onClickCart = (menu) => {
     dispatch(addMenuToCart(menu));
-    addToast(`1 ${menu.name} added to Cart`, {
+    addToast(`1 {menu.name} added to Cart`, {
       appearance: "success",
       autoDismiss: true,
     });
@@ -74,8 +74,8 @@ function Menu() {
       {/* Admin table */}
       <div
         style={{
-          marginTop: 5,
-          marginBottom: 5,
+          marginTop: 10,
+          marginBottom: 10,
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
@@ -83,7 +83,7 @@ function Menu() {
         }}
       >
         <div className="d-flex flex-row flex-wrap justify-content-start my-2">
-          <div style={{ marginRight: 5 }}>
+          <div style={{ marginRight: 2 }}>
             <InputGroup className="mb-3">
               <InputGroup.Text id="basic-addon1">
                 <AiOutlineSearch />
@@ -93,12 +93,12 @@ function Menu() {
                   setSearchValue(event.target.value);
                 }}
                 placeholder="Find Menu"
-                aria-label="Seach"
+                aria-label="Search"
                 aria-describedby="basic-addon1"
               />
             </InputGroup>
           </div>
-          <div style={{ marginRight: 5 }}>
+          <div style={{ marginRight: 10 }}>
             <Select
               autoSize={false}
               styles={styles}
@@ -135,7 +135,7 @@ function Menu() {
                 <Card.Body>
                   <Card.Title>{menu.name}</Card.Title>
                   <div className="d-flex justify-content-between align-items-center">
-                    <Card.Subtitle>$ {menu.price}</Card.Subtitle>
+                    <Card.Subtitle> {menu.price} Tk</Card.Subtitle>
 
                     <Button
                       size="sm"

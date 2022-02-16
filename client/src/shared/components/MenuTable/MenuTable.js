@@ -27,8 +27,9 @@ export const MenuTable = () => {
       {showModal && (
         <Modal show={showModal} onHide={onHideModal} menu={selectedMenu} />
       )}
-      <div className="d-flex flex-row flex-wrap justify-content-between">
+      <div className="d-flex flex-row flex-wrap justify-content-center">
         <h4>Menu</h4>
+        <br></br>
         <Button
           variant="warning"
           onClick={() => {
@@ -45,8 +46,8 @@ export const MenuTable = () => {
         </Button>
       </div>
       <hr />
-      <Container fluid>
-        <div className="w-100 text-right d-flex justify-content-end mb-2"></div>
+      <Container fluid-md>
+        <div className="w-100 text-left d-flex justify-content-end mb-2"></div>
         <Table size="sm" striped bordered variant="warning" hover responsive>
           <thead>
             <tr>
@@ -73,7 +74,7 @@ export const MenuTable = () => {
                     />
                   </td>
                   <td className="align-middle">{menu.name}</td>
-                  <td className="align-middle">${menu.price}</td>
+                  <td className="align-middle">{menu.price} Tk</td>
                   <td className="align-middle">{menu?.category?.name}</td>
                   <td width="10%" className="text-center align-middle">
                     <div className="d-flex flex-row justify-content-center">

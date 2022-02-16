@@ -133,7 +133,7 @@ const Order = () => {
           <h4>Orders</h4>
         </div>
         <hr />
-        <Container fluid>
+        <Container fluid-md>
           {user?.data?.type === "admin" && (
             <div
               style={{
@@ -249,7 +249,7 @@ const Order = () => {
                     )}
                     <td>{new Date(item?.createdAt).toLocaleString()}</td>
                     <td>{item?.address}</td>
-                    <td>${getTotalPrice(item?.carts)}</td>
+                    <td>{getTotalPrice(item?.carts)} Tk</td>
                     <td>{item?.status}</td>
                     {user?.data?.type === "admin" && <td>Cash on Delivery</td>}
                     <td>{item?.review}</td>

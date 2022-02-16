@@ -12,7 +12,7 @@ const DashboardPage = () => {
     });
   }, []);
   return (
-    <Container fluid className="mt-4">
+    <Container md className="mt-4">
       <Row>
       <Col md={4}>
         <Alert variant="danger">
@@ -32,26 +32,33 @@ const DashboardPage = () => {
           <Alert variant="info">
             <Alert.Heading>Today's Income</Alert.Heading>
             <hr />
-            <h1 className="mb-0">${data?.orders?.today?.income}</h1>
+            <h1 className="mb-0">{data?.orders?.today?.income} Tk</h1>
           </Alert>
         </Col>
-      </Row>
-      <Row xs={1} md={12} className="g-4 mb-4">
-        <Col md={6}>
-          <CommonPieChart data={data?.orders?.today?.stat} />
-          <div className="d-flex flex-row justify-content-center align-items-end">
-            <h5>Daily Order Summary</h5>
-          </div>
-        </Col>
+       </Row>
+      
+      <Row>
+      {/* <Row xs={1} md={12} className="g-4 mb-4"> */}
+        
         <Col md={6}>
           <Card>
             <Card.Header>Orders / Today</Card.Header>
             <Card.Body>
-              <BarGraph data={data?.orders?.today?.stat} />
+              <BarGraph data={data?.orders?.today?.stat} 
+              color="#00D49F"/>
+
             </Card.Body>
           </Card>
         </Col>
+        <Col md={6}>
+          <CommonPieChart data={data?.orders?.today?.stat} />
+          <div className="d-flex flex-row justify-content-center align-items-end">
+             <h5>Daily Order Summary</h5> 
+          </div>
+        </Col>
       </Row>
+
+
       <Row>
         <Col md={6}>
           <Alert variant="info">
@@ -64,7 +71,7 @@ const DashboardPage = () => {
           <Alert variant="primary">
             <Alert.Heading>Current Month's Income</Alert.Heading>
             <hr />
-            <h1 className="mb-0">${data?.orders?.currentMonth?.income}</h1>
+            <h1 className="mb-0">{data?.totalEarnings} Tk</h1>
           </Alert>
         </Col>
       </Row>
@@ -75,7 +82,7 @@ const DashboardPage = () => {
             <Card.Body>
               <BarGraph
                 data={data?.orders?.currentMonth?.stat}
-                color="#00C49F"
+                color="#00D49F"
               />
             </Card.Body>
           </Card>
@@ -99,7 +106,7 @@ const DashboardPage = () => {
           <Alert variant="success">
             <Alert.Heading>Current Year's Income</Alert.Heading>
             <hr />
-            <h1 className="mb-0">${data?.orders?.currentYear?.income}</h1>
+            <h1 className="mb-0">{data?.totalEarnings} Tk</h1>
           </Alert>
         </Col>
       </Row>
@@ -134,7 +141,7 @@ const DashboardPage = () => {
           <Alert variant="danger">
             <Alert.Heading>Total Income</Alert.Heading>
             <hr />
-            <h1 className="mb-0">${data?.totalEarnings}</h1>
+            <h1 className="mb-0">{data?.totalEarnings} Tk</h1>
           </Alert>
         </Col>
       </Row>

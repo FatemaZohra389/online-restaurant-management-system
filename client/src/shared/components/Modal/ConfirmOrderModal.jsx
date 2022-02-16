@@ -38,7 +38,7 @@ const ConfirmOrderModal = ({ data, show, onHide, onConfirm }) => {
           {/* <p>Are you sure you want to confirm your order?</p> */}
           <div className="form-wrapper">
             <InputGroup className="mb-3">
-              <InputGroup.Text id="basic-addon1">Address</InputGroup.Text>
+              <InputGroup.Text id="basic-addon1">Address and Phone Number</InputGroup.Text>
               <FormControl
                 defaultValue={address}
                 onChange={(e) => setAddress(e.target.value)}

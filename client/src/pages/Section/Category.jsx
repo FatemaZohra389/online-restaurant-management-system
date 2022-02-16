@@ -32,7 +32,7 @@ const Category = () => {
   return (
     <>
       <div className="cart-page">
-        <div className="d-flex flex-row flex-wrap justify-content-between m-2">
+        <div className="d-flex flex-row  flex-col justify-content-center">
           <h4>Categories</h4>
           <Button
             variant="warning"
@@ -47,7 +47,7 @@ const Category = () => {
           </Button>
         </div>
         <hr />
-        <Container fluid>
+        <Container fluid-md>
           <Table
             variant={user?.data?.type === "admin" ? "light" : "warning"}
             bordered

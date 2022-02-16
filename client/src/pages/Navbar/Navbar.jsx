@@ -17,7 +17,7 @@ const Navbar = () => {
     <>
       <NavBar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container fluid>
-          <Nav navbarScroll className="me-auto">
+          <Nav navbarScroll className="w-100 d-flex justify-content-center">
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/menu">Menu</Nav.Link>
             {user?.data?.type === "admin" && (

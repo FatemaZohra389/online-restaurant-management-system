@@ -1,6 +1,6 @@
 import "./HomePage.scss";
 
-import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 function HomePage() {
   return (
     <div>

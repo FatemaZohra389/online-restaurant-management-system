@@ -1,13 +1,13 @@
 .Container {
   text-align: center;
-  color: peachpuff;
+  color: rgb(255, 251, 247);
 }
 section {
   display: flex;
 }
 .half-width {
 //   width: 30%;
-  margin: 5%;
+  margin: 2%;
 }
 section {
   display: flex;
@@ -22,6 +22,26 @@ section {
   background-image: linear-gradient(orange, tomato);
   color: white;
   font-weight: 700;
-  padding: 10px 40px;
+  padding: 10px 20px;
   border-radius: 20px;
 }
+.top-background{
+
+  background-color: #264653;
+  
+  max-width: 100%; 
+  height: auto;
+  display:grid;
+  }
+  .col-md-7{
+    color:aliceblue;
+    text-align: left;
+    padding:5% 10% 10% 5%;
+  }
+  
+  .photo-album{
+  display:flex;
+  flex-wrap: wrap;
+  
+  
+  }
