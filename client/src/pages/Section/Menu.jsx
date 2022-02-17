@@ -126,16 +126,16 @@ function Menu() {
         </>
       )}
 
-      <div
-        className=" d-flex flex-row flex-wrap justify-content-center my-2"
-        style={{
-          width: "60vw",
-          alignItems: "center",
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}
-      >
-        {user.data.type === "customer" && (
+      {user.data.type === "customer" && (
+        <div
+          className=" d-flex flex-row flex-wrap justify-content-center my-2"
+          style={{
+            width: "60vw",
+            alignItems: "center",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
           <Row xs={1} md={12} className="g-4">
             {list.map((menu, idx) => (
               <Col key={menu.id} md={3}>
@@ -160,8 +160,8 @@ function Menu() {
               </Col>
             ))}
           </Row>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
