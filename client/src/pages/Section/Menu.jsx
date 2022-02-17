@@ -126,32 +126,42 @@ function Menu() {
         </>
       )}
 
-      {user.data.type === "customer" && (
-        <Row xs={1} md={12} className="g-4">
-          {list.map((menu, idx) => (
-            <Col key={menu.id} md={3}>
-              <Card>
-                <Card.Img variant="top" src={menu.photo} />
-                <Card.Body>
-                  <Card.Title>{menu.name}</Card.Title>
-                  <div className="d-flex justify-content-between align-items-center">
-                    <Card.Subtitle> {menu.price} Tk</Card.Subtitle>
+      <div
+        className=" d-flex flex-row flex-wrap justify-content-center my-2"
+        style={{
+          width: "60vw",
+          alignItems: "center",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      >
+        {user.data.type === "customer" && (
+          <Row xs={1} md={12} className="g-4">
+            {list.map((menu, idx) => (
+              <Col key={menu.id} md={3}>
+                <Card>
+                  <Card.Img variant="top" src={menu.photo} />
+                  <Card.Body>
+                    <Card.Title>{menu.name}</Card.Title>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <Card.Subtitle> {menu.price} Tk</Card.Subtitle>
 
-                    <Button
-                      size="sm"
-                      onClick={() => onClickCart(menu)}
-                      variant="warning"
-                    >
-                      <AiOutlineShoppingCart />
-                      &nbsp;Add
-                    </Button>
-                  </div>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      )}
+                      <Button
+                        size="sm"
+                        onClick={() => onClickCart(menu)}
+                        variant="warning"
+                      >
+                        <AiOutlineShoppingCart />
+                        &nbsp;Add
+                      </Button>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        )}
+      </div>
     </div>
   );
 }
